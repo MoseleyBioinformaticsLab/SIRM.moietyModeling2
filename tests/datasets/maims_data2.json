@@ -1,0 +1,494 @@
+{
+    "datasets": [
+        {
+            "data": {
+                "UDP_GlcNAC": [
+                    {
+                        "height": 0.9998607487,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C0"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C1"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C2"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C3"
+                    },
+                    {
+                        "height": 4.72e-05,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C4"
+                    },
+                    {
+                        "height": 8.93e-05,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C5"
+                    },
+                    {
+                        "height": 2.71e-06,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C6"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C7"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C8"
+                    },
+                    {
+                        "height": 1.72e-08,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C9"
+                    },
+                    {
+                        "height": 1.18e-09,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C10"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C11"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C12"
+                    },
+                    {
+                        "height": 9.29e-13,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C13"
+                    },
+                    {
+                        "height": 1.27e-13,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C14"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C15"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C16"
+                    },
+                    {
+                        "height": 5.13e-18,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C17"
+                    }
+                ]
+            },
+            "datasetName": "0h",
+            "py/object": "moiety_modeling.modeling.Dataset"
+        },
+        {
+            "data": {
+                "UDP_GlcNAC": [
+                    {
+                        "height": 0.0695227968,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C0"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C1"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C2"
+                    },
+                    {
+                        "height": 0.0031797948,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C3"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C4"
+                    },
+                    {
+                        "height": 0.1499726658,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C5"
+                    },
+                    {
+                        "height": 0.1808647143,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C6"
+                    },
+                    {
+                        "height": 0.005682681,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C7"
+                    },
+                    {
+                        "height": 0.0872766311,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C8"
+                    },
+                    {
+                        "height": 0.0004908765,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C9"
+                    },
+                    {
+                        "height": 0.0163577295,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C10"
+                    },
+                    {
+                        "height": 0.2839618484,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C11"
+                    },
+                    {
+                        "height": 0.0265651641,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C12"
+                    },
+                    {
+                        "height": 0.1760657673,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C13"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C14"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C15"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C16"
+                    },
+                    {
+                        "height": 5.93e-05,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C17"
+                    }
+                ]
+            },
+            "datasetName": "6h",
+            "py/object": "moiety_modeling.modeling.Dataset"
+        },
+        {
+            "data": {
+                "UDP_GlcNAC": [
+                    {
+                        "height": 0.0206527976,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C0"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C1"
+                    },
+                    {
+                        "height": 9.29e-05,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C2"
+                    },
+                    {
+                        "height": 0.0003583153,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C3"
+                    },
+                    {
+                        "height": 0.0020703059,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C4"
+                    },
+                    {
+                        "height": 0.0919107237,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C5"
+                    },
+                    {
+                        "height": 0.0715747914,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C6"
+                    },
+                    {
+                        "height": 0.0201321486,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C7"
+                    },
+                    {
+                        "height": 0.0582958468,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C8"
+                    },
+                    {
+                        "height": 0.0038209994,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C9"
+                    },
+                    {
+                        "height": 0.0312405595,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C10"
+                    },
+                    {
+                        "height": 0.3086614901,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C11"
+                    },
+                    {
+                        "height": 0.049523904,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C12"
+                    },
+                    {
+                        "height": 0.2952708988,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C13"
+                    },
+                    {
+                        "height": 0.024567609,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C14"
+                    },
+                    {
+                        "height": 0.0218266848,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C15"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C16"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C17"
+                    }
+                ]
+            },
+            "datasetName": "12h",
+            "py/object": "moiety_modeling.modeling.Dataset"
+        },
+        {
+            "data": {
+                "UDP_GlcNAC": [
+                    {
+                        "height": 0.0054112001,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C0"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C1"
+                    },
+                    {
+                        "height": 0.0002443601,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C2"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C3"
+                    },
+                    {
+                        "height": 0.0006771256,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C4"
+                    },
+                    {
+                        "height": 0.0601364562,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C5"
+                    },
+                    {
+                        "height": 0.0505878726,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C6"
+                    },
+                    {
+                        "height": 0.0257101541,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C7"
+                    },
+                    {
+                        "height": 0.0558144077,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C8"
+                    },
+                    {
+                        "height": 0.0078118293,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C9"
+                    },
+                    {
+                        "height": 0.0238954121,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C10"
+                    },
+                    {
+                        "height": 0.2451402014,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C11"
+                    },
+                    {
+                        "height": 0.0650931207,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C12"
+                    },
+                    {
+                        "height": 0.3471455508,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C13"
+                    },
+                    {
+                        "height": 0.0524199207,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C14"
+                    },
+                    {
+                        "height": 0.0546107206,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C15"
+                    },
+                    {
+                        "height": 0.0053016678,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C16"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C17"
+                    }
+                ]
+            },
+            "datasetName": "24h",
+            "py/object": "moiety_modeling.modeling.Dataset"
+        },
+        {
+            "data": {
+                "UDP_GlcNAC": [
+                    {
+                        "height": 0.0013563833,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C0"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C1"
+                    },
+                    {
+                        "height": 0.000470185,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C2"
+                    },
+                    {
+                        "height": 0.0002145004,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C3"
+                    },
+                    {
+                        "height": 0.0008907347,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C4"
+                    },
+                    {
+                        "height": 0.0470947611,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C5"
+                    },
+                    {
+                        "height": 0.0371916408,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C6"
+                    },
+                    {
+                        "height": 0.0219394801,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C7"
+                    },
+                    {
+                        "height": 0.0486243453,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C8"
+                    },
+                    {
+                        "height": 0.0056235016,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C9"
+                    },
+                    {
+                        "height": 0.0243139349,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C10"
+                    },
+                    {
+                        "height": 0.2437263469,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C11"
+                    },
+                    {
+                        "height": 0.0664551468,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C12"
+                    },
+                    {
+                        "height": 0.3776013587,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C13"
+                    },
+                    {
+                        "height": 0.0617711234,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C14"
+                    },
+                    {
+                        "height": 0.0555852048,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C15"
+                    },
+                    {
+                        "height": 0.0071413523,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C16"
+                    },
+                    {
+                        "height": 0,
+                        "heightSE": 0,
+                        "labelingIsotopes": "13C17"
+                    }
+                ]
+            },
+            "datasetName": "36h",
+            "py/object": "moiety_modeling.modeling.Dataset"
+        }
+    ]
+}
