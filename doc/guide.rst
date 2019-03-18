@@ -29,6 +29,9 @@ GitHub Package installation (method 2)
 Make sure you have git_ installed:
 
 .. code:: bash
+
+   cd ~/
+   git clone https://github.com/MoseleyBioinformaticsLab/moiety_modeling.git
     
 Dependecies 
 ...........
