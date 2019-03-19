@@ -13,12 +13,12 @@ def find_version():
     return version
 
 REQUIRES = [
-    "docopt >= 0.6.2",
-    "jsonpickle >= 0.9.5",
-    "matplotlib >= 2.1.1",
-    "numpy >= 1.14.0",
-    "SAGA-optimize >= 1.0.1",
-    "scipy >= 1.1.0"
+    "docopt",
+    "jsonpickle",
+    "matplotlib",
+    "numpy",
+    "SAGA-optimize",
+    "scipy"
 ]
 
 setup(
