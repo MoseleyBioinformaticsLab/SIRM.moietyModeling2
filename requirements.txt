@@ -2,5 +2,5 @@ docopt >= 0.6.2
 jsonpickle >= 0.9.5
 matplotlib >= 2.1.1
 numpy >= 1.14.0
-SAGA-optimize >= 1.0.3
+SAGA-optimize >= 1.0.3.2
 scipy >= 1.1.0
