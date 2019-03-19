@@ -12,6 +12,14 @@ def find_version():
         raise RuntimeError('Cannot find version information')
     return version
 
+REQUIRES = [
+    "docopt >= 0.6.2",
+    "jsonpickle >= 0.9.5",
+    "matplotlib >= 2.1.1",
+    "numpy >= 1.14.0",
+    "SAGA-optimize >= 1.0.1",
+    "scipy >= 1.1.0"
+]
 
 setup(
 
@@ -22,7 +30,7 @@ setup(
     author_email="hji236@g.uky.edu",
     description="",
     keywords="",
-    install_requires=[],
+    install_requires=REQUIRES,
     url="",
     long_description=open('README.rst').read(),
     platforms='any',
