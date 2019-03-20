@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 
 def find_version():
-    with open('mwtab/__init__.py', 'r') as fd:
+    with open('moiety_modeling/__init__.py', 'r') as fd:
         version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
                             fd.read(), re.MULTILINE).group(1)
     if not version:

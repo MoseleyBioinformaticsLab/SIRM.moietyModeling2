@@ -255,6 +255,7 @@ class ModelRank:
         self.path = path if path is not None else '{0}/model_rank/'.format(os.path.dirname(pathFile))
         os.mkdir(self.path)
         self.pathFile = pathFile
+        self.rankedData = []
 
     def rank(self, selectionCriteria):
         """To rank the models according to the selection criteria.
@@ -287,14 +288,14 @@ class ModelRank:
                             sys.exit("Models cannot be compared with different optimizationSetting!")
 
         # the sorted function return the ordered items in the dictionary, each item is a set of key and value, like (key, value).
-        rankedData = sorted(dataCollection.items(), key=operator.itemgetter(1))
+        self.rankedData = sorted(dataCollection.items(), key=operator.itemgetter(1))
 
         with open('{0}Model_rank_on_{1}.json'.format(self.path, selectionCriteria), 'w') as outFile:
-            outFile.write(jsonpickle.encode({'rank': rankedData, 'selectionCriteria': selectionCriteria, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
+            outFile.write(jsonpickle.encode({'rank': self.rankedData, 'selectionCriteria': selectionCriteria, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
 
         with open('{0}Model_rank_on_{1}.txt'.format(self.path, selectionCriteria), 'w') as outFile:
             outFile.write("Model rank of {0} based on model selection criteria.\n".format(selectionCriteria))
-            for data in rankedData:
+            for data in self.rankedData:
                 outFile.write('{0}: optimizeParams: {1} \n'.format(data[0], data[1]))
 
 
