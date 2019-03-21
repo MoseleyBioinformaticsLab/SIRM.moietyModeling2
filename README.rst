@@ -2,6 +2,19 @@ moiety_modeling
 ===============
 
 
+.. image:: https://img.shields.io/pypi/v/moiety_modeling.svg
+   :target: https://pypi.org/project/moiety_modeling
+   :alt: Current library version
+
+.. image:: https://img.shields.io/pypi/pyversions/moiety_modeling.svg
+   :target: https://pypi.org/project/moiety_modeling
+   :alt: Supported Python versions
+
+.. image:: https://api.travis-ci.org/MoseleyBioinformaticsLab/moiety_modeling.svg?branch=master
+   :target: https://travis-ci.org/MoseleyBioinformaticsLab/moiety_modeling
+   :alt: Travis CI status
+
+
 `moiety_modeling` package provides facilities for moiety model representation, model optimization and model selection.
 
 
