@@ -11,12 +11,12 @@
                 "mutationRate": 3,
                 "populationSize": 20,
                 "startTemperature": 0.5,
-                "stepNumber": 10000,
+                "stepNumber": 100,
                 "temperatureStepSize": 100
             },
             "noPrintAllResults": 1,
             "noPrintBestResults": 1,
-            "optimizationSetting": "SAGA_10000"
+            "optimizationSetting": "SAGA_100"
         },
         "SLSQP": {
             "methodParameters": null,
