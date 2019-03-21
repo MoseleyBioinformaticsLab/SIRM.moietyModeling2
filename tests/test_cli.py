@@ -71,7 +71,7 @@ def test_rank(analysisPaths_txtfile):
     assert os.system(command) == 0
 
 
-@pytest.mark.parameterize("analysisResults_jsonfile", [
+@pytest.mark.parametrize("analysisResults_jsonfile", [
 
     ("/tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
     ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/TNC_logDifference_analysis/best_model_TNC_logDifference_Stats.json"),

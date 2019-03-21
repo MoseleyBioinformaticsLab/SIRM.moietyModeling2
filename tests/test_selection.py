@@ -3,7 +3,7 @@ import moiety_modeling
 import jsonpickle
 import math
 
-@pytest.mark.parameterize("optimization_file, analysis_file", [
+@pytest.mark.parametrize("optimization_file, analysis_file", [
 
     ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000/best_model_SAGA_1000.json",
      "tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
