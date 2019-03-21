@@ -16,7 +16,7 @@ import math
 ])
 def test_analysis(optimization_file, analysis_file):
 
-    analysis = moiety_modeling.ResultsAnalysis(optimization_file)
+    analysis = moiety_modeling.analysis.ResultsAnalysis(optimization_file)
     analysisResults = analysis.analyze()
     with open(analysis_file) as file:
         standardResults = jsonpickle.decode(file.read())
