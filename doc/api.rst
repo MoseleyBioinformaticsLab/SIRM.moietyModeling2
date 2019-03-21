@@ -1,7 +1,3 @@
-The moiety_modeling API reference
-=================================
-
-
 .. automodule:: moiety_modeling
 
 .. automodule:: moiety_modeling.modeling

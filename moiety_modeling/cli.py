@@ -112,10 +112,11 @@ def cli(args):
 
         if args['optimizations']:
             if args['--a']:
-                analysisFileDir = os.path.basename(os.path.dirname(args['<optimizationPaths_txtfile>']))
-                path = args['--working'] if args['--working'] else '{0}/{1}_analysis/'.format(os.path.dirname(args['<optimizationPaths_txtfile>']), analysisFileDir)
+                base = os.path.basename(args['<optimizationPaths_txtfile>'])
+                baseName = os.path.splitext(base)[0]
+                path = args['--working'] if args['--working'] else '{0}/{1}_analysis/'.format(os.path.dirname(args['<optimizationPaths_txtfile>']), baseName)
                 os.mkdir(path)
-                analysisPathFile = open('{0}{1}_analysis.txt'.format(path, analysisFileDir), 'w')
+                analysisPathFile = open('{0}{1}_analysis.txt'.format(path, baseName), 'w')
                 with open(args['<optimizationPaths_txtfile>']) as pathFile:
                     for fileName in pathFile:
                         resAnalysis = analysis.ResultsAnalysis(fileName.replace("\n", ""), path)

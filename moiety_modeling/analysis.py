@@ -77,7 +77,7 @@ class ResultsAnalysis:
                 dsResidual = 0
                 for molecule in self.model.molecules:
                     calculatedMolecule = self._calculateMolecule(molecule, moietyValue[dataset.datasetName])
-                    residuals = self._calculateResiduals(molecule, dataset, _calculatedMolecule)
+                    residuals = self._calculateResiduals(molecule, dataset, calculatedMolecule)
                     name = 'DS{0}.{1}'.format(dataset.datasetName, molecule.name)
                     dsResidual += self._calculateRSS(residuals)
                     calculatedMolecules[name].append(calculatedMolecule)
@@ -133,6 +133,8 @@ class ResultsAnalysis:
         self.jsonfilePath = '{0}{1}_{2}_{3}_Stats.json'.format(self.path, self.model.name, self.optimizationSetting, self.energyFunction)
         with open(self.jsonfilePath, 'w') as outJSONfile:
             outJSONfile.write(jsonpickle.encode({'model': self.model.name, 'optimizeParams': optimizeParams, 'moietyValues': moietyValues, 'calculatedMolecules': calculatedMoleculesStats, 'datasets': self.datasets, "optimizationSetting": self.optimizationSetting, 'energyFunction': self.energyFunction}))
+
+        return {'optimizeParams': optimizeParams, 'moietyValues': moietyValues, 'calculatedMolecules': calculatedMoleculesStats}
 
     def _calculateMolecule(self, molecule, moietyStateValue):
 
@@ -255,7 +257,6 @@ class ModelRank:
         self.path = path if path is not None else '{0}/model_rank/'.format(os.path.dirname(pathFile))
         os.mkdir(self.path)
         self.pathFile = pathFile
-        self.rankedData = []
 
     def rank(self, selectionCriteria):
         """To rank the models according to the selection criteria.
@@ -288,15 +289,17 @@ class ModelRank:
                             sys.exit("Models cannot be compared with different optimizationSetting!")
 
         # the sorted function return the ordered items in the dictionary, each item is a set of key and value, like (key, value).
-        self.rankedData = sorted(dataCollection.items(), key=operator.itemgetter(1))
+        rankedData = sorted(dataCollection.items(), key=operator.itemgetter(1))
 
         with open('{0}Model_rank_on_{1}.json'.format(self.path, selectionCriteria), 'w') as outFile:
-            outFile.write(jsonpickle.encode({'rank': self.rankedData, 'selectionCriteria': selectionCriteria, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
+            outFile.write(jsonpickle.encode({'rank': rankedData, 'selectionCriteria': selectionCriteria, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
 
         with open('{0}Model_rank_on_{1}.txt'.format(self.path, selectionCriteria), 'w') as outFile:
             outFile.write("Model rank of {0} based on model selection criteria.\n".format(selectionCriteria))
-            for data in self.rankedData:
+            for data in rankedData:
                 outFile.write('{0}: optimizeParams: {1} \n'.format(data[0], data[1]))
+
+        return rankedData
 
 
 class ComparisonTable:

@@ -6,3 +6,6 @@ testing/
 doc/_*
 *.egg
 dist/
+tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference_backup/
+tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_absDifference/
+

@@ -1,0 +1,30 @@
+{
+    "optimizations": {
+        "L-BFGS-B": {
+            "methodParameters": null,
+            "optimizationSetting": "L_BFGS_B"
+        },
+        "SAGA": {
+            "methodParameters": {
+                "alpha": 1,
+                "crossoverRate": 0.05,
+                "mutationRate": 3,
+                "populationSize": 20,
+                "startTemperature": 0.5,
+                "stepNumber": 10000,
+                "temperatureStepSize": 100
+            },
+            "noPrintAllResults": 1,
+            "noPrintBestResults": 1,
+            "optimizationSetting": "SAGA_10000"
+        },
+        "SLSQP": {
+            "methodParameters": null,
+            "optimizationSetting": "SLSQP"
+        },
+        "TNC": {
+            "methodParameters": null,
+            "optimizationSetting": "TNC"
+        }
+    }
+}
