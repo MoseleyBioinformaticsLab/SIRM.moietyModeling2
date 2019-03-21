@@ -1,0 +1,101 @@
+Descriptive Statistics of 6_G1R1A1U3_g5 using L_BFGS_B and logDifference energy function 
+
+Moiety States Statistical Results: 
+ Datasets: 24h
+     ribose[13C0]: {'count': 100, 'mean': 0.21, 'std': 0.40936018074033237, 'max': 1.0, 'min': 0.0}
+     ribose[13C5]: {'count': 100, 'mean': 0.79, 'std': 0.40936018074033237, 'max': 1.0, 'min': 0.0}
+     glucose[13C0]: {'count': 100, 'mean': 0.21057821699001042, 'std': 0.40910131616377265, 'max': 1.0, 'min': 0.0}
+     glucose[13C5]: {'count': 100, 'mean': 0.7894217830099897, 'std': 0.40910131616377265, 'max': 1.0, 'min': 0.0}
+     acetyl[13C0]: {'count': 100, 'mean': 0.5414206296866553, 'std': 0.49566837500840616, 'max': 1.0, 'min': 0.0}
+     acetyl[13C2]: {'count': 100, 'mean': 0.4585793703133447, 'std': 0.4956683750084062, 'max': 1.0, 'min': 0.0}
+     uracil[13C0]: {'count': 100, 'mean': 0.028859467300002294, 'std': 0.16519393937797242, 'max': 1.0, 'min': 0.0}
+     uracil[13C1]: {'count': 100, 'mean': 0.3793336665368724, 'std': 0.35355023296662325, 'max': 1.0, 'min': 0.0}
+     uracil[13C2]: {'count': 100, 'mean': 0.26273444947947583, 'std': 0.291979170314747, 'max': 1.0, 'min': 0.0}
+     uracil[13C3]: {'count': 100, 'mean': 0.32907241668364945, 'std': 0.3290841341694439, 'max': 1.0, 'min': 0.0}
+ Datasets: 48h
+     ribose[13C0]: {'count': 100, 'mean': 0.010130234474681336, 'std': 0.024877084997063786, 'max': 0.08278122238832364, 'min': 0.0}
+     ribose[13C5]: {'count': 100, 'mean': 0.9898697655253187, 'std': 0.024877084997063786, 'max': 1.0, 'min': 0.9172187776116764}
+     glucose[13C0]: {'count': 100, 'mean': 0.008092866791698497, 'std': 0.023481557838891852, 'max': 0.08372671363690809, 'min': 0.0}
+     glucose[13C5]: {'count': 100, 'mean': 0.9919071332083017, 'std': 0.023481557838891855, 'max': 1.0, 'min': 0.9162732863630919}
+     acetyl[13C0]: {'count': 100, 'mean': 0.30688419554323504, 'std': 0.3970681020951231, 'max': 1.0, 'min': 0.0}
+     acetyl[13C2]: {'count': 100, 'mean': 0.6931158044567648, 'std': 0.3970681020951231, 'max': 1.0, 'min': 0.0}
+     uracil[13C0]: {'count': 100, 'mean': 0.058548596986220704, 'std': 0.15904366227075148, 'max': 1.0, 'min': 0.0}
+     uracil[13C1]: {'count': 100, 'mean': 0.27356024448301325, 'std': 0.23162215474656106, 'max': 0.8843969573937763, 'min': 0.0}
+     uracil[13C2]: {'count': 100, 'mean': 0.1940700788477646, 'std': 0.2334317412059721, 'max': 1.0, 'min': 0.0}
+     uracil[13C3]: {'count': 100, 'mean': 0.47382107968300136, 'std': 0.27847558071127226, 'max': 1.0, 'min': 0.0}
+ Datasets: 72h
+     ribose[13C0]: {'count': 100, 'mean': 0.09376870700150476, 'std': 0.05689071179035847, 'max': 0.19694913415869908, 'min': 0.0}
+     ribose[13C5]: {'count': 100, 'mean': 0.9062312929984953, 'std': 0.05689071179035847, 'max': 1.0, 'min': 0.8030508658413009}
+     glucose[13C0]: {'count': 100, 'mean': 0.08290760830331602, 'std': 0.05697404447964353, 'max': 0.18238354283272995, 'min': 0.0}
+     glucose[13C5]: {'count': 100, 'mean': 0.9170923916966839, 'std': 0.05697404447964353, 'max': 1.0, 'min': 0.81761645716727}
+     acetyl[13C0]: {'count': 100, 'mean': 0.5188164919983826, 'std': 0.09341844011905108, 'max': 1.0, 'min': 0.0}
+     acetyl[13C2]: {'count': 100, 'mean': 0.4811835080016173, 'std': 0.09341844011905108, 'max': 1.0, 'min': 0.0}
+     uracil[13C0]: {'count': 100, 'mean': 0.21048765058144903, 'std': 0.04323908700912589, 'max': 0.24817265812811773, 'min': 0.0}
+     uracil[13C1]: {'count': 100, 'mean': 0.28922299129618356, 'std': 0.031294117196575204, 'max': 0.3953154124004936, 'min': 0.22718758318995122}
+     uracil[13C2]: {'count': 100, 'mean': 0.2285813299696765, 'std': 0.03778488318329695, 'max': 0.5074474310028408, 'min': 0.16879008324247752}
+     uracil[13C3]: {'count': 100, 'mean': 0.271708028152691, 'std': 0.03270602986628321, 'max': 0.3744871667665345, 'min': 0.10876999766163438}
+
+Calculated Molecule Statistical Results: 
+ Calculated DS24h.UDP_GlcNAC:
+     Calculated DS24h.UDP_GlcNAC[13C0]: {'count': 100, 'mean': 0.01, 'std': 0.1, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C1]: {'count': 100, 'mean': 0.07833333333333334, 'std': 0.25120919689784565, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C10]: {'count': 100, 'mean': 0.037192800633335625, 'std': 0.17430039892900173, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C11]: {'count': 100, 'mean': 0.1686479023767939, 'std': 0.30545936499394544, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C12]: {'count': 100, 'mean': 0.049662527965411825, 'std': 0.15597219085535632, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C13]: {'count': 100, 'mean': 0.2090810484145072, 'std': 0.2948367825597388, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C14]: {'count': 100, 'mean': 0.15288113777504073, 'std': 0.25487911583703604, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C15]: {'count': 100, 'mean': 0.1402896991782336, 'std': 0.23939372238829948, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C2]: {'count': 100, 'mean': 0.013333333333333332, 'std': 0.07741618689438272, 'max': 0.5, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C3]: {'count': 100, 'mean': 0.026666666666666665, 'std': 0.1291429053847843, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C4]: {'count': 100, 'mean': 0.018333333333333333, 'std': 0.1157976291168818, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C5]: {'count': 100, 'mean': 0.013333333333333332, 'std': 0.10508934790820164, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C6]: {'count': 100, 'mean': 0.03527723080000797, 'std': 0.16287568128567567, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C7]: {'count': 100, 'mean': 0.010190783739023337, 'std': 0.0703511234882042, 'max': 0.5, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C8]: {'count': 100, 'mean': 0.01844353578431245, 'std': 0.11578524860642915, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C9]: {'count': 100, 'mean': 0.018333333333333333, 'std': 0.1157976291168818, 'max': 1.0, 'min': 0.0}
+     Calculated DS24h.UDP_GlcNAC[13C16]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+     Calculated DS24h.UDP_GlcNAC[13C17]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+ Calculated DS48h.UDP_GlcNAC:
+     Calculated DS48h.UDP_GlcNAC[13C0]: {'count': 100, 'mean': 3.63767205494423e-05, 'std': 0.0001467833697530324, 'max': 0.000703140142564803, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C1]: {'count': 100, 'mean': 5.01471295531937e-05, 'std': 0.00020012755403912884, 'max': 0.0009761621141633512, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C10]: {'count': 100, 'mean': 0.03483921182569845, 'std': 0.1281703759570309, 'max': 0.8879003596341987, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C11]: {'count': 100, 'mean': 0.08358624238448858, 'std': 0.14668675436032108, 'max': 0.5, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C12]: {'count': 100, 'mean': 0.05861787134238075, 'std': 0.10893446568610134, 'max': 0.7360698362515252, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C13]: {'count': 100, 'mean': 0.3303811473187065, 'std': 0.25738208181411293, 'max': 1.0, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C14]: {'count': 100, 'mean': 0.15549136129322746, 'std': 0.2348617825282684, 'max': 1.0, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C15]: {'count': 100, 'mean': 0.3216672163650392, 'std': 0.3158524758664983, 'max': 1.0, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C2]: {'count': 100, 'mean': 6.440893868313782e-05, 'std': 0.00025629205638989203, 'max': 0.0011154742846458973, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C3]: {'count': 100, 'mean': 9.937161474682224e-05, 'std': 0.0004005633983076164, 'max': 0.0021940933484203683, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C4]: {'count': 100, 'mean': 2.84329332051969e-05, 'std': 0.00011631681813457784, 'max': 0.0007068236065199675, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C5]: {'count': 100, 'mean': 0.001580791238984698, 'std': 0.004238864074318824, 'max': 0.01732340110078808, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C6]: {'count': 100, 'mean': 0.0025980276473855962, 'std': 0.0058326918644216385, 'max': 0.022754990670868114, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C7]: {'count': 100, 'mean': 0.0030317155760870933, 'std': 0.007053468380898904, 'max': 0.028696583884360985, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C8]: {'count': 100, 'mean': 0.0064717572469112986, 'std': 0.013964361732272878, 'max': 0.05114578096191565, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C9]: {'count': 100, 'mean': 0.001455920424352277, 'std': 0.0034933057421276557, 'max': 0.018183675944072254, 'min': 0.0}
+     Calculated DS48h.UDP_GlcNAC[13C16]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+     Calculated DS48h.UDP_GlcNAC[13C17]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+ Calculated DS72h.UDP_GlcNAC:
+     Calculated DS72h.UDP_GlcNAC[13C0]: {'count': 100, 'mean': 0.0005778267716254815, 'std': 0.00032757904953072353, 'max': 0.0009257008052082557, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C1]: {'count': 100, 'mean': 0.0007261548508957227, 'std': 0.00039889482066219375, 'max': 0.0009835266363263807, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C10]: {'count': 100, 'mean': 0.11076787207845097, 'std': 0.021863643299553842, 'max': 0.1288820143444433, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C11]: {'count': 100, 'mean': 0.12397611588592347, 'std': 0.03328463767882478, 'max': 0.3333333333333333, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C12]: {'count': 100, 'mean': 0.1829444958916385, 'std': 0.029165406440218197, 'max': 0.3333333333333333, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C13]: {'count': 100, 'mean': 0.2350155507697951, 'std': 0.022207628332184134, 'max': 0.38378257133552474, 'min': 0.21128651320873473}
+     Calculated DS72h.UDP_GlcNAC[13C14]: {'count': 100, 'mean': 0.09166376455645954, 'std': 0.04489252716826747, 'max': 0.5074474310028408, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C15]: {'count': 100, 'mean': 0.10589865373029773, 'std': 0.01603155913042305, 'max': 0.11955681999699293, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C2]: {'count': 100, 'mean': 0.0011360016267148042, 'std': 0.0006289968878194104, 'max': 0.0017183021640176633, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C3]: {'count': 100, 'mean': 0.0014033700231062122, 'std': 0.000772882535984719, 'max': 0.002005385271138148, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C4]: {'count': 100, 'mean': 0.0005577122728588237, 'std': 0.00031578121455348604, 'max': 0.0009937636864399398, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C5]: {'count': 100, 'mean': 0.019208177083413238, 'std': 0.004095945682632588, 'max': 0.02565618733892571, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C6]: {'count': 100, 'mean': 0.024491556353285895, 'std': 0.004820074704263766, 'max': 0.02978245251766206, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C7]: {'count': 100, 'mean': 0.036737799698556096, 'std': 0.00661724276827076, 'max': 0.04417596551509202, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C8]: {'count': 100, 'mean': 0.04687791516338497, 'std': 0.008901865032159562, 'max': 0.06396208939422544, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C9]: {'count': 100, 'mean': 0.01801703324359322, 'std': 0.003584146363006815, 'max': 0.024464009611600536, 'min': 0.0}
+     Calculated DS72h.UDP_GlcNAC[13C16]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+     Calculated DS72h.UDP_GlcNAC[13C17]: {'count': 100, 'mean': 0.0, 'std': 0.0, 'max': 0, 'min': 0}
+
+Average RSS, RSS_AIC, RSS_AICc, and BIC.
+ AIC: {'count': 100, 'mean': -180.36917563286224, 'std': 32.46244826429914, 'max': -129.6492804340707, 'min': -254.88089742606473}
+ AICc: {'count': 100, 'mean': -160.82631849000515, 'std': 32.46244826429914, 'max': -110.10642329121356, 'min': -235.3380402832076}
+ BIC: {'count': 100, 'mean': -144.56746279470536, 'std': 32.46244826429914, 'max': -93.84756759591376, 'min': -219.07918458790778}
+ energy: {'count': 100, 'mean': 55.37983653126937, 'std': 12.28700204667579, 'max': 103.04838020479498, 'min': 28.980401457237974}
