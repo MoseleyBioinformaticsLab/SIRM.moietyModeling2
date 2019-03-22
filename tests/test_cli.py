@@ -38,7 +38,7 @@ import pytest
 ])
 def test_analysis_a(optimizationPaths_txtfile):
 
-    command = "python3 -m moiety_modeling analyze optimizations --a {}".format(optimizationPaths_txtfile)
+    command = "python3 -m moiety_modeling analyze optimizations --a {} --working=tests/ ".format(optimizationPaths_txtfile)
 
     assert os.system(command) == 0
 
@@ -66,14 +66,14 @@ def test_analysis_s(optimizationResults_jsonfile):
 ])
 def test_rank(analysisPaths_txtfile):
 
-    command = "python3 -m moiety_modeling analyze rank {} --rankCriteria=AICc".format(analysisPaths_txtfile)
+    command = "python3 -m moiety_modeling analyze rank {} --working=tests/ --rankCriteria=AICc".format(analysisPaths_txtfile)
 
     assert os.system(command) == 0
 
 
 @pytest.mark.parametrize("analysisResults_jsonfile", [
 
-    ("/tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
+    ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
     ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/TNC_logDifference_analysis/best_model_TNC_logDifference_Stats.json"),
     ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SLSQP_logDifference_analysis/best_model_SLSQP_logDifference_Stats.json"),
     ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/L_BFGS_B_logDifference_analysis/best_model_L_BFGS_B_logDifference_Stats.json")
