@@ -1,0 +1,8 @@
+{
+    "optimizations": {
+        "SLSQP": {
+            "methodParameters": null,
+            "optimizationSetting": "SLSQP"
+        }
+    }
+}

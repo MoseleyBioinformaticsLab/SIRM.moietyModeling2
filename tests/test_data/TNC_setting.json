@@ -1,0 +1,8 @@
+{
+    "optimizations": {
+        "TNC": {
+            "methodParameters": null,
+            "optimizationSetting": "TNC"
+        }
+    }
+}

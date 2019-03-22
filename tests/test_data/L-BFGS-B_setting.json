@@ -1,0 +1,8 @@
+{
+    "optimizations": {
+        "L-BFGS-B": {
+            "methodParameters": null,
+            "optimizationSetting": "L_BFGS_B"
+        }
+    }
+}

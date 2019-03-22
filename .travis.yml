@@ -6,10 +6,6 @@ install:
 jobs:
   include:
   - stage: test
-    python: '3.4'
-    script:
-    - python -m pytest -v
-  - stage: test
     python: '3.5'
     script:
     - python -m pytest -v

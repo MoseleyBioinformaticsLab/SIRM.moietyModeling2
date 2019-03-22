@@ -2,31 +2,34 @@ import os
 import pytest
 
 
-# def test_modeling():
-#
-#     command1 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --multiprocess --energyFunction=logDifference" \
-#         .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json",
-#                 "tests/test_data/optimizationSetting.json")
-#
-#     assert os.system(command1) == 0
-#
-#     command2 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --multiprocess --energyFunction=logDifference" \
-#         .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json",
-#                 "tests/test_data/optimizationSetting.json")
-#
-#     assert os.system(command2) == 0
-#
-#     command3 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --energyFunction=logDifference" \
-#         .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json",
-#                 "tests/test_data/optimizationSetting.json")
-#
-#     assert os.system(command3) == 0
-#
-#     command4 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --energyFunction=logDifference" \
-#         .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json",
-#                 "tests/test_data/optimizationSetting.json")
-#
-#     assert os.system(command4) == 0
+@pytest.mark.parametrize("settingFile", [
+
+    ("tests/test_data/tests/test_data/SLSQP_setting.json"),
+    ("tests/test_data/tests/test_data/TNC_setting.json"),
+    ("tests/test_data/tests/test_data/SAGA_setting.json"),
+    ("tests/test_data/tests/test_data/L-BFGS-B_setting.json")
+])
+def test_modeling(settingFile):
+
+    command1 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --multiprocess --energyFunction=logDifference" \
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+
+    assert os.system(command1) == 0
+
+    command2 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --multiprocess --energyFunction=logDifference" \
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+
+    assert os.system(command2) == 0
+
+    command3 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --energyFunction=logDifference" \
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+
+    assert os.system(command3) == 0
+
+    command4 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --energyFunction=absDifference" \
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+
+    assert os.system(command4) == 0
 
 
 @pytest.mark.parametrize("optimizationPaths_txtfile", [

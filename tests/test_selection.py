@@ -27,9 +27,9 @@ def test_analysis(optimization_file, analysis_file):
 
     for molecule in anaMolecules:
         for isotopologue in anaMolecules[molecule]:
-            assert abs(isotopologue['mean'] - standMolecules[molecule][isotopologue]['mean']) < math.pow(10, -6)
-            assert abs(isotopologue['max'] - standMolecules[molecule][isotopologue]['max']) < math.pow(10, -6)
-            assert abs(isotopologue['std'] - standMolecules[molecule][isotopologue]['std']) < math.pow(10, -6)
+            assert abs(anaMolecules[molecule][isotopologue]['mean'] - standMolecules[molecule][isotopologue]['mean']) < math.pow(10, -6)
+            assert abs(anaMolecules[molecule][isotopologue]['max'] - standMolecules[molecule][isotopologue]['max']) < math.pow(10, -6)
+            assert abs(anaMolecules[molecule][isotopologue]['std'] - standMolecules[molecule][isotopologue]['std']) < math.pow(10, -6)
 
 
 
