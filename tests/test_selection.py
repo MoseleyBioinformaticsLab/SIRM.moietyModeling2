@@ -21,12 +21,15 @@ def test_analysis(optimization_file, analysis_file):
     with open(analysis_file) as file:
         standardResults = jsonpickle.decode(file.read())
     anaMolecules = analysisResults['calculatedMolecules']
-    standMoleculs = standardResults['calculatedMolecules']
+    standMolecules = standardResults['calculatedMolecules']
+    print("anaMolecules", anaMolecules)
+    print("standMolecules", standMolecules)
+
     for molecule in anaMolecules:
         for isotopologue in anaMolecules[molecule]:
-            assert abs(isotopologue['mean'] - standMoleculs[molecule][isotopologue]['mean']) < math.pow(10, -6)
-            assert abs(isotopologue['max'] - standMoleculs[molecule][isotopologue]['max']) < math.pow(10, -6)
-            assert abs(isotopologue['std'] - standMoleculs[molecule][isotopologue]['std']) < math.pow(10, -6)
+            assert abs(isotopologue['mean'] - standMolecules[molecule][isotopologue]['mean']) < math.pow(10, -6)
+            assert abs(isotopologue['max'] - standMolecules[molecule][isotopologue]['max']) < math.pow(10, -6)
+            assert abs(isotopologue['std'] - standMolecules[molecule][isotopologue]['std']) < math.pow(10, -6)
 
 
 

@@ -10,10 +10,9 @@ Welcome to moiety_modeling's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   api
    guide
    tutorial
-
+   api
 
 
 Indices and tables

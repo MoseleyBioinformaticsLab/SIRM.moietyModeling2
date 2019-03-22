@@ -38,7 +38,9 @@ import pytest
 ])
 def test_analysis_a(optimizationPaths_txtfile):
 
-    command = "python3 -m moiety_modeling analyze optimizations --a {} --working=tests/ ".format(optimizationPaths_txtfile)
+    base = os.path.basename(optimizationPaths_txtfile)
+    baseName = os.path.splitext(base)[0]
+    command = "python3 -m moiety_modeling analyze optimizations --a {} --working=tests/{}/ ".format(optimizationPaths_txtfile, baseName)
 
     assert os.system(command) == 0
 
@@ -66,7 +68,9 @@ def test_analysis_s(optimizationResults_jsonfile):
 ])
 def test_rank(analysisPaths_txtfile):
 
-    command = "python3 -m moiety_modeling analyze rank {} --working=tests/ --rankCriteria=AICc".format(analysisPaths_txtfile)
+    base = os.path.basename(analysisPaths_txtfile)
+    baseName = os.path.splitext(base)[0]
+    command = "python3 -m moiety_modeling analyze rank {} --working=tests/{}/ --rankCriteria=AICc".format(analysisPaths_txtfile, baseName)
 
     assert os.system(command) == 0
 
