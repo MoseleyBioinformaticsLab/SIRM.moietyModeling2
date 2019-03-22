@@ -9,8 +9,11 @@ The `moiety_modeling` can be used to:
 
 In this document, each use will be explained in details.
 
+The moiety_modeling API tutorial
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Using moiety_modeling to construct moiety model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------
 
 In the moiety modeling, we dissemble molelcule into different moieties, and then try to capture the isotope flow from moieties to molecule. The relationship between moiety value can be captured when construct the moiety model. The moiety model will be stored in the JSONPickle file.
 
@@ -34,7 +37,7 @@ Here is the example of moiety model construction.
             outFile.write(jsonpickle.encode({'models': [model]}))
 
 Using moiety_modeling to store isotopologue dataset
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 The Dataset class in the 'moiety_modeling' package organizes a single mass spectroscopy isotopologue profile dataset into a dictionary-based data structure.
 
@@ -86,7 +89,7 @@ Here is the example of dataset construction.
             outFile.write(jsonpickle.encode({'datasets': [dataset1, dataset2]}))
 
 Setting optimization parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 The optimization parameters are stored in the JSONPickle file. 4 optimization methods, SAGA and 3 scipy optimization methods ('TNC', 'SLSQP', 'L_BFGS_B'), are available in the package. When use SAGA optimization method, optimization parameters for SAGA should be specified. The parameters for scipy optimization methods can also be modified. Please refer the correponding API for detailed information.
 
@@ -102,8 +105,11 @@ Here is the example of optimization parameters construction.
     >>> with open('optimizationSetting.json', 'w') as outFile:
             outFile.write(jsonpickle.encode({'optimizations': setting}))
 
+The moiety_modeling CLI tutorial
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Using moiety_modeling to optimize parameters of moiety model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------
 
 To conduct the optimization, moiety model, datasets, and optimization settings should be provided. Please use the -h for more information of the option parameters.
 
@@ -112,7 +118,7 @@ To conduct the optimization, moiety model, datasets, and optimization settings s
     python3 -m moiety_modeling modeling --models=<model_jsonfile> --datasets=<dataset_jsonfile> --optimizations=<optimizationSetting_json> --repetition=100 --split --multiprocess --energyFunction=logDifference
 
 Using moiety_modeling to analyze optimized results and select the optimal model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------------------
 
 The `moiety_modeling` package provides facilities to analyze the optimized results, select the optimal model, and compare the selection results under different optimization settings. Please refer to API for detailed information of option parameters.
 
@@ -124,7 +130,7 @@ The `moiety_modeling` package provides facilities to analyze the optimized resul
     python3 -m moiety_modeling analyze table <rankPaths_txtfile>   # To compare the selection results under different optimizaton settings.
 
 Using moiety_modeling to visualize the optimzed results
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------
 
 The 'moiety_modeling' package provides facilities to visualize the optimization results.
 
