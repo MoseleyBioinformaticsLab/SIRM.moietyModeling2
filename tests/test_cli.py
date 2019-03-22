@@ -4,10 +4,10 @@ import pytest
 
 @pytest.mark.parametrize("settingFile", [
 
-    ("tests/test_data/tests/test_data/SLSQP_setting.json"),
-    ("tests/test_data/tests/test_data/TNC_setting.json"),
-    ("tests/test_data/tests/test_data/SAGA_setting.json"),
-    ("tests/test_data/tests/test_data/L-BFGS-B_setting.json")
+    ("tests/test_data/SLSQP_setting.json"),
+    ("tests/test_data/TNC_setting.json"),
+    ("tests/test_data/SAGA_setting.json"),
+    ("tests/test_data/L-BFGS-B_setting.json")
 ])
 def test_modeling(settingFile):
 
