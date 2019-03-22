@@ -1,5 +1,5 @@
 import pytest
-import moiety_modeling
+from moiety_modeling import analysis
 import jsonpickle
 import math
 
@@ -16,7 +16,7 @@ import math
 ])
 def test_analysis(optimization_file, analysis_file):
 
-    analysisInstance = moiety_modeling.analysis.ResultsAnalysis(optimization_file)
+    analysisInstance = analysis.ResultsAnalysis(optimization_file)
     analysisResults = analysisInstance.analyze()
     with open(analysis_file) as file:
         standardResults = jsonpickle.decode(file.read())
