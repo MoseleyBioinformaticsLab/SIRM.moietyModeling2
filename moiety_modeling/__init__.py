@@ -12,10 +12,6 @@ This package includes the following modules:
     and derived classes for performing a single model optimization, and the :class:`~moiety_modeling.modeling.OptimizationManager`
     class to manage the optimization process of moiety modeling.
 
-``cli``
-    This module provides a command-line interface for the ``moiety_modeling`` package.
-
-
 ``model``
     This module provides the :class:`~moiety_modeling.model.Moiety`, :class:`~moiety_modeling.model.Molecule`,
     :class:`~moiety_modeling.model.Relationship`, and :class:`~moiety_modeling.model.Model` classes for representing a
@@ -29,6 +25,9 @@ This package includes the following modules:
     the optimal model selected under different optimization settings. The :class:`~moiety_modeling.analysis.PlotMoietyDistribution`
     class plots the distribution of moiety value of the moiety model. The :class:`~moiety_modeling.analysis.PlotIsotopologueIntensity`
     class plots comparison of the observed and the calculated isotopologue intensity.
+
+``cli``
+    This module provides a command-line interface for the ``moiety_modeling`` package.
 
 """
 
