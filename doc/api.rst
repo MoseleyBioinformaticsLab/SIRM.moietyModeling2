@@ -1,23 +1,11 @@
 .. automodule:: moiety_modeling
 
-.. automodule:: moiety_modeling.modeling
 
-.. autoclass:: Dataset
+.. automodule:: moiety_modeling.modeling
     :member-order: bysource
     :members:
     :special-members:
-    :exclude-members: __weakref__
-
-.. autoclass:: OptimizationManager
-    :member-order: bysource
-    :members: 
-    :special-members:
-    :exclude-members: __weakref__
-
-
-.. automodule:: moiety_modeling.cli
-
-.. autofunction:: cli
+    :exclude-members: __weakref__, __str__
 
 
 .. automodule:: moiety_modeling.model
@@ -32,5 +20,9 @@
     :members:
     :special-members:
     :exclude-members: __weakref__
-    
+
+
+.. automodule:: moiety_modeling.cli
+
+.. autofunction:: cli
  

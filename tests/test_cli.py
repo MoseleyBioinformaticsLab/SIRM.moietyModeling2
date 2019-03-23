@@ -12,22 +12,22 @@ import pytest
 def test_modeling(settingFile):
 
     command1 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --multiprocess --energyFunction=logDifference" \
-        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_48_72.json", settingFile)
 
     assert os.system(command1) == 0
 
     command2 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --multiprocess --energyFunction=logDifference" \
-        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_48_72.json", settingFile)
 
     assert os.system(command2) == 0
 
     command3 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --energyFunction=logDifference" \
-        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_48_72.json", settingFile)
 
     assert os.system(command3) == 0
 
     command4 = "python3 -m moiety_modeling modeling --models={0} --datasets={1} --optimizations={2} --repetition=100 --split --energyFunction=absDifference" \
-        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_24_48_72.json", settingFile)
+        .format("tests/test_data/test_models.json", "tests/test_data/UDP_data_48_72.json", settingFile)
 
     assert os.system(command4) == 0
 

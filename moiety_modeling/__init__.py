@@ -11,17 +11,18 @@ This package includes the following modules:
 
 ``modeling``
     This module provides the :class:`~moiety_modeling.modeling.Dataset` class to organize a single mass spectroscopy
-    profile dataset into a dictionary-based data structure, and the :class:`~moiety_modeling.modeling.OptimizationManager`
+    profile dataset into a dictionary-based data structure, the :class:`~moiety_modeling.modeling.ModelOptimization`
+    and derived classes for performing a single model optimization, and the :class:`~moiety_modeling.modeling.OptimizationManager`
     class to manage the optimization process of moiety modeling.
 
 ``cli``
-    This module provides command-line interface for the ``moiety_modeling`` package.
+    This module provides a command-line interface for the ``moiety_modeling`` package.
 
 
 ``model``
-    This module provides the :class:`~moiety_modeling.model.Moiety` class, the :class:`~moiety_modeling.model.Molecule`
-    class, the :class:`~moiety_modeling.model.Relationship` class, and the :class:`~moiety_modeling.model.Model`
-    class to construct moiety model.
+    This module provides the :class:`~moiety_modeling.model.Moiety`, :class:`~moiety_modeling.model.Molecule`,
+    :class:`~moiety_modeling.model.Relationship`, and :class:`~moiety_modeling.model.Model` classes for representing a
+    moiety model.
 
 ``analysis``
     This module provides several classes to analyze the optimization results, select the optimal model, and visualize the

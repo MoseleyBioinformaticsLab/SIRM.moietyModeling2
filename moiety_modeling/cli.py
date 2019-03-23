@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 """
-The moiety_modeling command-line interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The moiety_modeling command-line interface option
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Usage:
     moiety_modeling -h | --help

@@ -51,8 +51,7 @@ class ResultsAnalysis:
     def analyze(self):
         """Analyze the optimization results for each model.
 
-        :return: None
-        :rtype: :py:obj:`None`
+        :return dict: the analysis results.
         """
         #calculate the energies.
         energy = [ bestGuess.energy for bestGuess in self.bestGuesses ]
@@ -262,8 +261,7 @@ class ModelRank:
         """To rank the models according to the selection criteria.
 
         :param str selectionCriteria: the selection criteria (eg: AIC, BIC, BICc).
-        :return: None
-        :rtype: :py:obj:`None`
+        :return list: the rank results.
         """
 
         dataCollection = {}

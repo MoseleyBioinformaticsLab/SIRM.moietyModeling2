@@ -46,17 +46,20 @@ class Dataset(collections.UserDict):
 class ModelOptimization(abc.ABC):
 
     """
-    The abstract class of model optimization.
+    The abstract :class:`~moiety_modeling.modeling.ModelOptimization` class.
     """
 
     def __init__(self, model, datasets, path, methodParameters, optimizationSetting, energyFunction):
 
-        """
+        """ModelOptimization initializer.
 
-        :param model: the moiety model.
-        :param datasets: list of datasets of metabolite isotopologues.
-        :param path:
-        :param optimizationSetting:
+        :param model: the :class:`~moiety_modeling.model.Model` instance.
+        :type  model: :class:`~moiety_modeling.model.Model`.
+        :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
+        :param str path: the path to save the optimization results.
+        :param dict methodParameters: the parameters for optimization method.
+        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str energyFunction: the energy function used in the optimization.
         """
 
         self.model = model
@@ -74,7 +77,7 @@ class ModelOptimization(abc.ABC):
 
         """
         To create parameters for optimization.
-        :return: the list of parameters.
+        :return: a list of parameters.
         """
 
         elements = []
@@ -85,10 +88,10 @@ class ModelOptimization(abc.ABC):
 
     def energyCalculation(self, vector):
 
-        """
-        To calculate the energy in the model.
-        :param vector: the list of parameter value.
-        :return: the energy.
+        """To calculate the energy of the model.
+
+        :param list vector: a list of parameter value.
+        :return double: the energy.
         """
 
         energy = 0
@@ -99,12 +102,13 @@ class ModelOptimization(abc.ABC):
 
     def absDifferenceEnergyFunction(self, moietyStateValue, dataset):
 
-        """To calculate the energy of model. The absolute value between the observed and the calculated isotopologues.
+        """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues.
             energy = sum(|I<cal> - I<obs>|)
 
-        :param moietyStateValue: the list of value of the moietyStates.
-        :param dataset: the dataset object.
-        :return: the energy of the model.
+        :param list moietyStateValue: a list of value for the moietyStates.
+        :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset` instance.
+        :return double: the energy of the model.
         """
 
         energy = 0
@@ -119,12 +123,13 @@ class ModelOptimization(abc.ABC):
 
     def logDifferenceEnergyFunction(self, moietyStateValue, dataset):
 
-        """To calculate the energy of model. The difference between the log of observed and the calculated isotopologues.
+        """The log difference energy function. The difference between the log of observed and the calculated isotopologues.
             energy = sum(|log(I<cal>) - log(I<obs>)|)
 
-        :param moietyStateValue: the list of value of the moietyStates.
-        :param dataset: the dataset object.
-        :return: the energy of the model.
+        :param list moietyStateValue: a list of value for the moietyStates.
+        :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset` instance.
+        :return double: the energy of the model.
         """
 
         energy = 0
@@ -144,36 +149,37 @@ class ModelOptimization(abc.ABC):
                     energy += abs(math.log(calculated[isotopologue['labelingIsotopes']]) - math.log(isotopologue['height']))
         return energy
 
-    def proportionalEnergyFunction(self, moietyStateValue, dataset):
-
-        """To calculate the energy of the  model. The relative difference between calculated and observed isotopologues.
-            energy = sum(|I<cal> - I<obs>)/I<obs>|)
-
-        :param moietyStateValue: the list of value of the moietyStates.
-        :param dataset: the dataset object.
-        :return:the energy of the model.
-        """
-
-        energy = 0
-        for molecule in self.model.molecules:
-            if len(dataset[molecule.name]) != len(molecule.allStates):
-                sys.exit("The data of {0} is not enough.".format(molecule.name))
-            calculated = collections.defaultdict(lambda: 0)
-            for isotopologue in molecule.standardStates:
-                calculated[isotopologue] = sum(functools.reduce(operator.mul, [moietyStateValue[i] for i in isotopomer]) for isotopomer in molecule.standardStates[isotopologue])
-            leastIsotopologue = min([isotopologue['height'] for isotopologue in dataset[molecule.name] if isotopologue['height'] > 0]) / 2
-            for isotopologue in dataset[molecule.name]:
-                if isotopologue['height'] != 0:
-                    energy += abs((calculated[isotopologue['labelingIsotopes']] - isotopologue['height']) / isotopologue['height'])
-                else:
-                    energy += abs((calculated[isotopologue['labelingIsotopes']] - leastIsotopologue) / leastIsotopologue)
-        return energy
+    # def proportionalEnergyFunction(self, moietyStateValue, dataset):
+    #
+    #     """To calculate the energy of the  model. The relative difference between calculated and observed isotopologues.
+    #         energy = sum(|I<cal> - I<obs>)/I<obs>|)
+    #
+    #     :param moietyStateValue: the list of value of the moietyStates.
+    #     :param dataset: the dataset object.
+    #     :return:the energy of the model.
+    #     """
+    #
+    #     energy = 0
+    #     for molecule in self.model.molecules:
+    #         if len(dataset[molecule.name]) != len(molecule.allStates):
+    #             sys.exit("The data of {0} is not enough.".format(molecule.name))
+    #         calculated = collections.defaultdict(lambda: 0)
+    #         for isotopologue in molecule.standardStates:
+    #             calculated[isotopologue] = sum(functools.reduce(operator.mul, [moietyStateValue[i] for i in isotopomer]) for isotopomer in molecule.standardStates[isotopologue])
+    #         leastIsotopologue = min([isotopologue['height'] for isotopologue in dataset[molecule.name] if isotopologue['height'] > 0]) / 2
+    #         for isotopologue in dataset[molecule.name]:
+    #             if isotopologue['height'] != 0:
+    #                 energy += abs((calculated[isotopologue['labelingIsotopes']] - isotopologue['height']) / isotopologue['height'])
+    #             else:
+    #                 energy += abs((calculated[isotopologue['labelingIsotopes']] - leastIsotopologue) / leastIsotopologue)
+    #     return energy
 
     def optimizationScripts(self):
 
         """
         To save the optimization scripts of the optimization for check.
-        :return:
+        :return: None
+        :rtype: :py:obj:`None`
         """
 
         outputFile = open('{0}{1}_{2}_optimization_scripts.txt'.format(self.path, self.model.name, self.optimizationSetting), 'w')
@@ -210,19 +216,22 @@ class ModelOptimization(abc.ABC):
 class SAGAoptimization(ModelOptimization):
 
     """
-    The class of SAGA optimization (for combined datasets) inherited from ModelOptimization class.
+    The :class:`~moiety_modeling.modeling.SAGAoptimization` class (for combined datasets) inherited from :class:`~moiety_modeling.modeling.ModelOptimization`.
     """
 
     def __init__(self, model, datasets, path, methodParameters, optimizationSetting, energyFunction, noPrintBestResults, noPrintAllResults):
 
-        """
+        """SAGAoptimization initializer.
 
-        :param model: the model.
-        :param datasets: list of datasets.
-        :param path:
-        :param noPrintAllResults:
-        :param methodParameters:
-        :param optimizationSetting:
+        :param model:the :class:`~moiety_modeling.model.Model` instance.
+        :type model: :class:`~moiety_modeling.model.Model`
+        :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
+        :param str path: the path to save the optimization results.
+        :param dict methodParameters: the parameters for optimization method.
+        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str energyFunction: the energy function used in the optimization.
+        :param int noPrintBestResults: not to save the all the best results of the optimization process.
+        :param int noPrintAllResults: not to save the all the results of the optimization process.
         """
 
         super().__init__(model, datasets, path, methodParameters, optimizationSetting, energyFunction)
@@ -231,11 +240,11 @@ class SAGAoptimization(ModelOptimization):
 
     def bestResultsFile(self, i):
 
-        """
-        Open the file to record the best results during the optimization process.
-        :param i: the ith optimization.
-        :param datasetName: the name of the dataset.
+        """Open the file to record the best results during the optimization process.
+
+        :param int i: the ith optimization.
         :return: the file handler.
+        :rtype: :py:class:`~_io.TextIOWrapper`
         """
 
         if self.noPrintBestResults:
@@ -245,11 +254,11 @@ class SAGAoptimization(ModelOptimization):
 
     def allResultsFile(self, i):
 
-        """
-        Open the file to record the all optimization results.
-        :param i: the ith optimization.
-        :param datasetName: the name of the dataset.
-        :return: file handler.
+        """Open the file to record the all optimization results.
+
+        :param int i: the ith optimization.
+        :return: the file handler.
+        :rtype: :py:class:`~_io.TextIOWrapper`.
         """
 
         if self.noPrintAllResults:
@@ -259,10 +268,11 @@ class SAGAoptimization(ModelOptimization):
 
     def optimizeSingle(self, i):
 
-        """
-        To perform one optimization.
-        :param i: the ith optimization.
-        :return:
+        """To perform one optimization.
+
+        :param int i: the ith optimization.
+        :return: the best :class:`~SAGA_optimize.Guess` of the optimization process.
+        :rtype: :class:`~SAGA_optimize.Guess`.
         """
 
         saga = SAGA_optimize.SAGA(**self.methodParameters, bestResultsFile=self.bestResultsFile(i), allResultsFile=self.allResultsFile(i), energyCalculation=self.energyCalculation)
@@ -277,9 +287,10 @@ class SAGAoptimization(ModelOptimization):
 
     def creatSubdir(self):
 
-        """
-        To create subdirectories to store the optimization process.
-        :return:
+        """To create subdirectories to store the optimization process.
+
+        :return: None.
+        :rtype: :py:obj:`None`.
         """
 
         if not self.noPrintBestResults:
@@ -291,7 +302,7 @@ class SAGAoptimization(ModelOptimization):
 class SAGAseparateOptimization(SAGAoptimization):
 
     """
-    The class of SAGA optimization (for split datasets) inherited from the SAGAoptimization class.
+    The :class:`~moiety_modeling.modeling.SAGAseparateOptimization` class (for split dataset) inherited from :class:`~moiety_modeling.modeling.SAGAoptimization`.
     """
 
     def __init__(self, model, datasets, path, methodParameters, optimizationSetting, energyFunction, noPrintBestResults, noPrintAllResults):
@@ -299,10 +310,11 @@ class SAGAseparateOptimization(SAGAoptimization):
 
     def optimizeSingle(self, i):
 
-        """
-        Perform one optimization.
-        :param i: the ith optimization.
-        :return: the best Guess of the optimization.
+        """Perform one optimization.
+
+        :param int i: the ith optimization.
+        :return: the best :class:`~SAGA_optimize.Guess` of the optimization process.
+        :rtype: :class:`~SAGA_optimize.Guess`.
         """
 
         bestGuesses = []
@@ -319,14 +331,17 @@ class SAGAseparateOptimization(SAGAoptimization):
 
 class ScipyGuess:
     """
-    To convert optimization solution to Guess format.
+    To convert optimization results to :class:`~SAGA_optimize.Guess` instance.
     """
 
     def __init__(self, elements, energy):
+
+        """ScipyGuess initializer.
+
+        :param list elements: a list of value to parameters.
+        :param double energy: the energy of the Guess calculated from an energy function.
         """
-        :param elements: a list of value to parameters.
-        :param energy: the energy of this solution.
-        """
+
         self.elements = elements
         self.energy = energy
 
@@ -334,18 +349,21 @@ class ScipyGuess:
 class ScipyOptimization(ModelOptimization):
 
     """
-    The class of Scipy optimization (for combined datasets) inherited from ModelOptimization class.
+    The :class:`~moiety_modeling.modeling.ScipyOptimization` class (for combined datasets) inherited from :class:`~moiety_modeling.modeling.ModelOptimization`.
     """
 
     def __init__(self, model, datasets, path, methodParameters, optimizationSetting, energyFunction, method):
 
-        """
+        """ScipyOptimization initializer.
 
-        :param model: the moiety model.
-        :param datasets: the list of datasets of metabolite isotopologues.
-        :param method: the method in Scipy for optimization.
-        :param path:
-        :param optimizationSetting:
+        :param model: the :class:`~moiety_modeling.model.Model` instance.
+        :type model: :class:`~moiety_modeling.model.Model`
+        :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
+        :param str path: the path to save the optimization results.
+        :param dict methodParameters: the parameters for optimization method.
+        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str energyFunction: the energy function used in the optimization.
+        :param str method: the scipy optimization method.
         """
 
         super().__init__(model, datasets, path, methodParameters, optimizationSetting, energyFunction)
@@ -353,10 +371,11 @@ class ScipyOptimization(ModelOptimization):
 
     def optimizeSingle(self, i):
 
-        """
-        To perform one optimization.
+        """To perform one optimization.
+
         :param i: the ith optimization.
-        :return: the best Guess object of the optimization.
+        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` of the optimization process.
+        :rtype: :class:`~moiety_modeling.modeling.ScipyGuess`.
         """
 
         bounds = scipy.array([(0, 1) for _ in self.elements])
@@ -375,18 +394,31 @@ class ScipyOptimization(ModelOptimization):
 class ScipySeparateOptimization(ScipyOptimization):
 
     """
-    The class of Scipy optimization (for split datasets) inherited from ScipyOptimization class.
+    The :class:`~moiety_modeling.modeling.ScipySeparateOptimization` class (for split dataset) inherited from :class:`~moiety_modeling.modeling.ScipyOptimization`.
     """
 
     def __init__(self, model, datasets, path, methodParameters, energyFunction, optimizationSetting, method):
+
+        """ScipySeparateOptimization initializer.
+
+        :param model: the :class:`~moiety_modeling.model.Model` instance.
+        :type model: :class:`~moiety_modeling.model.Model`
+        :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
+        :param str path: the path to save the optimization results.
+        :param dict methodParameters: the parameters for optimization method.
+        :param str energyFunction: the energy function used in the optimization.
+        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str method: the scipy optimization method.
+        """
         super().__init__(model, datasets, path, methodParameters, energyFunction, optimizationSetting, method)
 
     def optimizeSingle(self, i):
 
-        """
-        To perform single optimization.
-        :param i: the ith optimization.
-        :return: the best Guess of the optimization.
+        """To perform single optimization.
+
+        :param int i: the ith optimization.
+        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` of the optimization process.
+        :rtype: :class:`~moiety_modeling.modeling.ScipyGuess`.
         """
 
         bestGuesses = []
