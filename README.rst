@@ -98,7 +98,7 @@ Authors
 .. _matplotlib: https://github.com/matplotlib/matplotlib
 .. _scipy: https://github.com/scipy/scipy
 .. _SAGA-optimize: https://pypi.org/project/SAGA-optimize/
-.. _LICENSE: https://spdx.org/licenses/BSD-3-Clause-Clear.html
+.. _LICENSE: https://github.com/MoseleyBioinformaticsLab/moiety_modeling/blob/master/LICENSE
 .. _ReadTheDocs: https://moiety-modeling.readthedocs.io/en/latest/
 
 
