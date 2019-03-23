@@ -29,7 +29,8 @@ import math
 import logging
 import shutil
 
-__all__ = ['Dataset', 'OptimizationManager']
+__all__ = ['Dataset', 'OptimizationManager', 'ModelOptimization', 'SAGAoptimization', 'SAGAseparateOptimization', 'ScipyGuess', 'ScipyOptimization', 'ScipySeparateOptimization']
+
 
 class Dataset(collections.UserDict):
 
@@ -54,8 +55,8 @@ class ModelOptimization(abc.ABC):
 
         """ModelOptimization initializer.
 
-        :param model: the :class:`~moiety_modeling.model.Model` instance.
-        :type  model: :class:`~moiety_modeling.model.Model`.
+        :param model: a :class:`~moiety_modeling.model.Model` instance.
+        :type  model: :class:`~moiety_modeling.model.Model`
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
@@ -103,13 +104,13 @@ class ModelOptimization(abc.ABC):
 
     def absDifferenceEnergyFunction(self, moietyStateValue, dataset):
 
-        """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues.
-            energy = sum(|I<cal> - I<obs>|)
+        """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues: energy = sum(|I<cal> - I<obs>|).
 
         :param list moietyStateValue: a list of value for the moietyStates.
         :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
-        :type dataset: :class:`~moiety_modeling.modeling.Dataset` instance.
-        :return double: the energy of the model.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset`
+        :return: the energy of the model.
+        :rtype: double
         """
 
         energy = 0
@@ -124,13 +125,13 @@ class ModelOptimization(abc.ABC):
 
     def logDifferenceEnergyFunction(self, moietyStateValue, dataset):
 
-        """The log difference energy function. The difference between the log of observed and the calculated isotopologues.
-            energy = sum(|log(I<cal>) - log(I<obs>)|)
+        """The log difference energy function. The difference between the log of observed and the calculated isotopologues: energy = sum(|log(I<cal>) - log(I<obs>)|)
 
         :param list moietyStateValue: a list of value for the moietyStates.
         :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
-        :type dataset: :class:`~moiety_modeling.modeling.Dataset` instance.
-        :return double: the energy of the model.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset`
+        :return: the energy of the model.
+        :rtype: double
         """
 
         energy = 0
@@ -199,8 +200,8 @@ class SAGAoptimization(ModelOptimization):
 
         """SAGAoptimization initializer.
 
-        :param model:the :class:`~moiety_modeling.model.Model` instance.
-        :type model: :class:`~moiety_modeling.model.Model`
+        :param model: a :class:`~moiety_modeling.model.Model` instance.
+        :type  model: :class:`~moiety_modeling.model.Model`
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
@@ -209,7 +210,6 @@ class SAGAoptimization(ModelOptimization):
         :param int noPrintBestResults: not to save the all the best results of the optimization process.
         :param int noPrintAllResults: not to save the all the results of the optimization process.
         """
-
         super().__init__(model, datasets, path, methodParameters, optimizationSetting, energyFunction)
         self.noPrintBestResults = noPrintBestResults
         self.noPrintAllResults = noPrintAllResults
@@ -282,6 +282,19 @@ class SAGAseparateOptimization(SAGAoptimization):
     """
 
     def __init__(self, model, datasets, path, methodParameters, optimizationSetting, energyFunction, noPrintBestResults, noPrintAllResults):
+
+        """SAGAseparateOptimization initializer.
+
+        :param model: a :class:`~moiety_modeling.model.Model` instance.
+        :type  model: :class:`~moiety_modeling.model.Model`
+        :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
+        :param str path: the path to save the optimization results.
+        :param dict methodParameters: the parameters for optimization method.
+        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str energyFunction: the energy function used in the optimization.
+        :param int noPrintBestResults: not to save the all the best results of the optimization process.
+        :param int noPrintAllResults: not to save the all the results of the optimization process.
+        """
         super().__init__(model, datasets, path, methodParameters, optimizationSetting, energyFunction, noPrintBestResults, noPrintAllResults)
 
     def optimizeSingle(self, i):
