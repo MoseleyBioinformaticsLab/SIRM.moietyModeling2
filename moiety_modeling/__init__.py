@@ -2,9 +2,6 @@
 # -*- coding: utf-8 _*_
 
 """
-The moiety_modeling API Reference
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Routines for working with moiety modeling.
 
 This package includes the following modules:
