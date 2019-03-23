@@ -68,7 +68,7 @@ class ModelOptimization(abc.ABC):
         self.methodParameters = methodParameters
         self.optimizationSetting = optimizationSetting
         self.energyFunction = energyFunction
-        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction, 'proportionalDifference': self.proportionalEnergyFunction}
+        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction}
         self.activeEnergyFunction = self.functionCollection[self.energyFunction]
         self.bestGuesses = []
         self.elements = self._createElements()
@@ -148,31 +148,6 @@ class ModelOptimization(abc.ABC):
                 elif calculated[isotopologue['labelingIsotopes']] != 0 and isotopologue['height'] != 0:
                     energy += abs(math.log(calculated[isotopologue['labelingIsotopes']]) - math.log(isotopologue['height']))
         return energy
-
-    # def proportionalEnergyFunction(self, moietyStateValue, dataset):
-    #
-    #     """To calculate the energy of the  model. The relative difference between calculated and observed isotopologues.
-    #         energy = sum(|I<cal> - I<obs>)/I<obs>|)
-    #
-    #     :param moietyStateValue: the list of value of the moietyStates.
-    #     :param dataset: the dataset object.
-    #     :return:the energy of the model.
-    #     """
-    #
-    #     energy = 0
-    #     for molecule in self.model.molecules:
-    #         if len(dataset[molecule.name]) != len(molecule.allStates):
-    #             sys.exit("The data of {0} is not enough.".format(molecule.name))
-    #         calculated = collections.defaultdict(lambda: 0)
-    #         for isotopologue in molecule.standardStates:
-    #             calculated[isotopologue] = sum(functools.reduce(operator.mul, [moietyStateValue[i] for i in isotopomer]) for isotopomer in molecule.standardStates[isotopologue])
-    #         leastIsotopologue = min([isotopologue['height'] for isotopologue in dataset[molecule.name] if isotopologue['height'] > 0]) / 2
-    #         for isotopologue in dataset[molecule.name]:
-    #             if isotopologue['height'] != 0:
-    #                 energy += abs((calculated[isotopologue['labelingIsotopes']] - isotopologue['height']) / isotopologue['height'])
-    #             else:
-    #                 energy += abs((calculated[isotopologue['labelingIsotopes']] - leastIsotopologue) / leastIsotopologue)
-    #     return energy
 
     def optimizationScripts(self):
 
