@@ -4,9 +4,10 @@
 moiety_modeling.modeling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This module provides the :class:`~moiety_modeling.modeling.Dataset` class to organize a single mass spectroscopy
-profile dataset in the form of an :py:class:`~collections.UserDict`, and the :class:`~moiety_modeling.modeling.OptimizationManager`
-class to manage the optimization process of moiety modeling.
+This module provides the :class:`~moiety_modeling.modeling.Dataset` class to organize a single mass spectroscopy profile
+dataset into a dictionary-based data structure, the :class:`~moiety_modeling.modeling.ModelOptimization` and derived
+classes for performing a single model optimization, and the :class:`~moiety_modeling.modeling.OptimizationManager` class
+to manage the optimization process of moiety modeling.
 
 The optimization results are stored in the JSON file. A txt file containing all the paths to the generated ``JSON`` files is
 created to facilitate further model analysis.
