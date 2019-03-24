@@ -72,7 +72,7 @@ Using moiety_modeling to optimize parameters of moiety model.
 
 .. code:: bash
 
-   python3 -m moiety_modeling modeling --models=<model_jsonfile> --datasets=<dataset_jsonfile> --optimizations=<optimizationSetting_json> --repetition=100 --split --multiprocess -energyFunction=logDifference
+   python3 -m moiety_modeling modeling --models=<model_jsonfile> --datasets=<dataset_jsonfile> --optimizations=<optimizationSetting_json> --repetition=100 --split --multiprocess --energyFunction=logDifference
 
 Using moiety_modeling to analyze optimized results and select the optimal model.
 
