@@ -19,7 +19,7 @@ Pip installation (method 1)
 
 .. code:: bash
 
-    python3 -m pip install moiety_modeling
+    python3 -m pip install moiety-modeling
 
 GitHub Package installation (method 2)
 ......................................
