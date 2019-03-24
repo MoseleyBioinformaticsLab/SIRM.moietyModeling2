@@ -70,20 +70,20 @@ Quickstart
 
 Using moiety_modeling to optimize parameters of moiety model.
 
-.. code:: python
+.. code:: bash
 
    python3 -m moiety_modeling modeling --models=<model_jsonfile> --datasets=<dataset_jsonfile> --optimizations=<optimizationSetting_json> --repetition=100 --split --multiprocess -energyFunction=logDifference
 
 Using moiety_modeling to analyze optimized results and select the optimal model.
 
-.. code:: python
+.. code:: bash
 
    python3 -m moiety_modeling analyze optimizations --a <optimizationPaths_txtfile>
    python3 -m moiety_modeling analyze rank <analysisPaths_txtfile> --rankCriteria=AICc
 
 Using moiety_modeling to visualize the optimzed results.
 
-.. code:: python 
+.. code:: bash 
 
    python3 -m moiety_modeling plot moiety <analysisResults_jsonfile>
 
