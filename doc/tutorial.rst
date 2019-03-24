@@ -2,22 +2,22 @@ The moiety_modeling Tutorial
 ============================
 
 The `moiety_modeling` can be used to:
-    * Construct moiety model.
-    * Optimize parameters of moiety model.
+    * Construct a moiety model.
+    * Optimize parameters of a moiety model.
     * Analyze optimized results and select the optimal model.
-    * Visualize the optiimzed results.
+    * Visualize the optimized results.
 
 In this document, each use will be explained in details.
 
 The moiety_modeling API tutorial
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Using moiety_modeling to construct moiety model
+Using moiety_modeling to construct a moiety model
 -----------------------------------------------
 
-In the moiety modeling, we dissemble molelcule into different moieties, and then try to capture the isotope flow from moieties to molecule. The relationship between moiety value can be captured when construct the moiety model. The moiety model will be stored in the JSONPickle file.
+In moiety modeling, we dissemble molelcules into molecular parts called moieties (called functional groups in chemistry), and then deconvolute molecular isotopic incorporation into moiety isotopic. A constructed moiety model is then stored in a JSON file.
 
-Here is the example of moiety model construction.
+Here is an example of moiety model construction.
 
 .. code:: Python
     
@@ -41,7 +41,7 @@ Using moiety_modeling to store isotopologue dataset
 
 The Dataset class in the 'moiety_modeling' package organizes a single mass spectroscopy isotopologue profile dataset into a dictionary-based data structure.
 
-Here is the example of dataset construction.
+Here is an example of dataset construction.
 
 .. code:: Python
 
@@ -91,7 +91,7 @@ Here is the example of dataset construction.
 Setting optimization parameters
 -------------------------------
 
-The optimization parameters are stored in the JSONPickle file. 4 optimization methods, SAGA and 3 scipy optimization methods ('TNC', 'SLSQP', 'L_BFGS_B'), are available in the package. When use SAGA optimization method, optimization parameters for SAGA should be specified. The parameters for scipy optimization methods can also be modified. Please refer the correponding API for detailed information.
+The optimization parameters are stored in a JSON file. Several optimization methods, including SAGA and three scipy optimization methods ('TNC', 'SLSQP', 'L_BFGS_B'), are available in the package. When using the SAGA optimization method, optimization parameters for SAGA should be specified. The parameters for scipy optimization methods can also be modified. Please refer the correponding API for detailed information.
 
 Here is the example of optimization parameters construction. 
 
@@ -120,7 +120,7 @@ To conduct the optimization, moiety model, datasets, and optimization settings s
 Using moiety_modeling to analyze optimized results and select the optimal model
 -------------------------------------------------------------------------------
 
-The `moiety_modeling` package provides facilities to analyze the optimized results, select the optimal model, and compare the selection results under different optimization settings. Please refer to API for detailed information of option parameters.
+The `moiety_modeling` package provides facilities to analyze the optimization results, select the optimal model, and compare the selection results under different optimization settings. Please refer to API for detailed information of option parameters.
 
 .. code:: Python
 

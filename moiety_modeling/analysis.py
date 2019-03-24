@@ -244,7 +244,7 @@ class ResultsAnalysis:
 
 class ModelRank:
 
-    """ModelRank class rank the models according to the selection criteria."""
+    """ModelRank class ranks the models according to the selection criteria."""
 
     def __init__(self, pathFile, path):
         """ModelRank initializer.
@@ -303,7 +303,7 @@ class ModelRank:
 class ComparisonTable:
 
     """
-    ComparisonTable class collects the best and second model under different optimization settings.
+    ComparisonTable class collects the best and second best models under different optimization settings.
     """
 
     def __init__(self, pathFile, path):

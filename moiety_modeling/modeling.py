@@ -4,8 +4,8 @@
 moiety_modeling.modeling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This module provides the :class:`~moiety_modeling.modeling.Dataset` class to organize a single mass spectroscopy profile
-dataset into a dictionary-based data structure, the :class:`~moiety_modeling.modeling.ModelOptimization` and derived
+This module provides the :class:`~moiety_modeling.modeling.Dataset` class to organize a single mass spectroscopy isotopologue
+profile dataset into a dictionary-based data structure, the :class:`~moiety_modeling.modeling.ModelOptimization` and derived
 classes for performing a single model optimization, and the :class:`~moiety_modeling.modeling.OptimizationManager` class
 to manage the optimization process of moiety modeling.
 
@@ -34,7 +34,7 @@ __all__ = ['Dataset', 'OptimizationManager', 'ModelOptimization', 'SAGAoptimizat
 
 class Dataset(collections.UserDict):
 
-    """Dataset class that stores a single mass spectroscopy profile in the form of :py:class:`~collections.UserDict`."""
+    """Dataset class that stores a single mass spectroscopy isotopologue profile in the form of :py:class:`~collections.UserDict`."""
 
     def __init__(self, datasetName, *args, **kwargs):
         """Dataset initializer.
@@ -58,9 +58,9 @@ class ModelOptimization(abc.ABC):
         :param model: a :class:`~moiety_modeling.model.Model` instance.
         :type  model: :class:`~moiety_modeling.model.Model`
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
-        :param str path: the path to save the optimization results.
+        :param str path: the subdirectory path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
-        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str optimizationSetting: abbreviated name for the optimization.
         :param str energyFunction: the energy function used in the optimization.
         """
 
@@ -90,9 +90,9 @@ class ModelOptimization(abc.ABC):
 
     def energyCalculation(self, vector):
 
-        """To calculate the energy of the model.
+        """Calculate the energy of the model.
 
-        :param list vector: a list of parameter value.
+        :param list vector: a list of model parameter values.
         :return double: the energy.
         """
 
@@ -106,7 +106,7 @@ class ModelOptimization(abc.ABC):
 
         """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues: energy = sum(|I<cal> - I<obs>|).
 
-        :param list moietyStateValue: a list of value for the moietyStates.
+        :param list moietyStateValue: a list of values for the moietyStates.
         :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
         :type dataset: :class:`~moiety_modeling.modeling.Dataset`
         :return: the energy of the model.
@@ -127,7 +127,7 @@ class ModelOptimization(abc.ABC):
 
         """The log difference energy function. The difference between the log of observed and the calculated isotopologues: energy = sum(|log(I<cal>) - log(I<obs>)|)
 
-        :param list moietyStateValue: a list of value for the moietyStates.
+        :param list moietyStateValue: a list of values for the moietyStates.
         :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
         :type dataset: :class:`~moiety_modeling.modeling.Dataset`
         :return: the energy of the model.
@@ -205,7 +205,7 @@ class SAGAoptimization(ModelOptimization):
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
-        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str optimizationSetting: abbreviated name for the optimization.
         :param str energyFunction: the energy function used in the optimization.
         :param int noPrintBestResults: not to save the all the best results of the optimization process.
         :param int noPrintAllResults: not to save the all the results of the optimization process.
@@ -247,7 +247,7 @@ class SAGAoptimization(ModelOptimization):
         """To perform one optimization.
 
         :param int i: the ith optimization.
-        :return: the best :class:`~SAGA_optimize.Guess` of the optimization process.
+        :return: the best :class:`~SAGA_optimize.Guess` from the optimization process.
         :rtype: :class:`~SAGA_optimize.Guess`.
         """
 
@@ -290,7 +290,7 @@ class SAGAseparateOptimization(SAGAoptimization):
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
-        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str optimizationSetting: abbreviated name for the optimization.
         :param str energyFunction: the energy function used in the optimization.
         :param int noPrintBestResults: not to save the all the best results of the optimization process.
         :param int noPrintAllResults: not to save the all the results of the optimization process.
@@ -302,7 +302,7 @@ class SAGAseparateOptimization(SAGAoptimization):
         """Perform one optimization.
 
         :param int i: the ith optimization.
-        :return: the best :class:`~SAGA_optimize.Guess` of the optimization process.
+        :return: the best :class:`~SAGA_optimize.Guess` from the optimization process.
         :rtype: :class:`~SAGA_optimize.Guess`.
         """
 
@@ -327,7 +327,7 @@ class ScipyGuess:
 
         """ScipyGuess initializer.
 
-        :param list elements: a list of value to parameters.
+        :param list elements: a list of values for model parameters.
         :param double energy: the energy of the Guess calculated from an energy function.
         """
 
@@ -350,7 +350,7 @@ class ScipyOptimization(ModelOptimization):
         :param list datasets: a list of :class:`~moiety_modeling.modeling.Dataset` instances.
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
-        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str optimizationSetting: abbreviated name for the optimization.
         :param str energyFunction: the energy function used in the optimization.
         :param str method: the scipy optimization method.
         """
@@ -363,7 +363,7 @@ class ScipyOptimization(ModelOptimization):
         """To perform one optimization.
 
         :param i: the ith optimization.
-        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` of the optimization process.
+        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` from the optimization process.
         :rtype: :class:`~moiety_modeling.modeling.ScipyGuess`.
         """
 
@@ -396,7 +396,7 @@ class ScipySeparateOptimization(ScipyOptimization):
         :param str path: the path to save the optimization results.
         :param dict methodParameters: the parameters for optimization method.
         :param str energyFunction: the energy function used in the optimization.
-        :param str optimizationSetting: the abbreviation for the optimization setting.
+        :param str optimizationSetting: abbreviated name for the optimization.
         :param str method: the scipy optimization method.
         """
         super().__init__(model, datasets, path, methodParameters, energyFunction, optimizationSetting, method)
@@ -406,7 +406,7 @@ class ScipySeparateOptimization(ScipyOptimization):
         """To perform single optimization.
 
         :param int i: the ith optimization.
-        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` of the optimization process.
+        :return: the best :class:`~moiety_modeling.modeling.ScipyGuess` from the optimization process.
         :rtype: :class:`~moiety_modeling.modeling.ScipyGuess`.
         """
 
