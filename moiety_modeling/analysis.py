@@ -255,7 +255,8 @@ class ModelRank:
         """
         self.selectionCriterion = selectionCriterion
         self.path = path if path is not None else '{0}/model_rank_{1}/'.format(os.path.dirname(pathFile), self.selectionCriterion)
-        os.mkdir(self.path)
+        if not path:
+            os.mkdir(self.path)
         self.pathFile = pathFile
 
     def rank(self):
