@@ -134,8 +134,8 @@ def cli(args):
             if args['<analysisPaths_txtfile>']:
                 path = args['--working'] if args['--working'] else None
                 selectionCriteria = args['--rankCriteria'] if args['--rankCriteria'] else 'AICc'
-                modelRank = analysis.ModelRank(args['<analysisPaths_txtfile>'], path)
-                modelRank.rank(selectionCriteria)
+                modelRank = analysis.ModelRank(args['<analysisPaths_txtfile>'], path, selectionCriteria)
+                modelRank.rank()
             else:
                 raise ImportError("Result path file is missing for model rank!")
 
@@ -148,8 +148,6 @@ def cli(args):
                 raise ImportError("Rank path file is missing for comparison table!")
 
         elif args['moiety']:
-            print("moiety")
-            print(args['<analysisResults_jsonfile>'])
             if args['<analysisResults_jsonfile>']:
                 path = args['--working'] if args['--working'] else None
                 moietyPlot = analysis.PlotMoietyDistribution(args['<analysisResults_jsonfile>'], path)

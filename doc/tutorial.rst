@@ -129,7 +129,7 @@ The `moiety_modeling` package provides facilities to analyze the optimization re
     python3 -m moiety_modeling analyze rank <analysisPaths_txtfile> --rankCriteria=AICc   # To rank models according to the selection criteria.
     python3 -m moiety_modeling analyze table <rankPaths_txtfile>   # To compare the selection results under different optimizaton settings.
 
-Using moiety_modeling to visualize the optimzed results
+Using moiety_modeling to visualize the optimized results
 -------------------------------------------------------
 
 The 'moiety_modeling' package provides facilities to visualize the optimization results.

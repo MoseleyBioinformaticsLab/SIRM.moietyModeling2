@@ -246,21 +246,21 @@ class ModelRank:
 
     """ModelRank class ranks the models according to the selection criteria."""
 
-    def __init__(self, pathFile, path):
+    def __init__(self, pathFile, path, selectionCriterion):
         """ModelRank initializer.
 
         :param str pathFile: the txt file containing paths to the model analysis results.
         :param str path: the path to store the model rank results.
+        :param str selectionCriterion: the selection criteria (eg: AIC, BIC, BICc).
         """
-
-        self.path = path if path is not None else '{0}/model_rank/'.format(os.path.dirname(pathFile))
+        self.selectionCriterion = selectionCriterion
+        self.path = path if path is not None else '{0}/model_rank_{1}/'.format(os.path.dirname(pathFile), self.selectionCriterion)
         os.mkdir(self.path)
         self.pathFile = pathFile
 
-    def rank(self, selectionCriteria):
+    def rank(self):
         """To rank the models according to the selection criteria.
 
-        :param str selectionCriteria: the selection criteria (eg: AIC, BIC, BICc).
         :return list: the rank results.
         """
 
@@ -274,7 +274,7 @@ class ModelRank:
                 with open(filename) as file:
                     data = jsonpickle.decode(file.read())
                     # keys are the AIC, AICc, BIC and energy.
-                    dataCollection[data['model']] = data['optimizeParams'][selectionCriteria]['mean']
+                    dataCollection[data['model']] = data['optimizeParams'][self.selectionCriterion]['mean']
                     if energyFunction is None:
                         energyFunction = data['energyFunction']
                     else:
@@ -289,11 +289,11 @@ class ModelRank:
         # the sorted function return the ordered items in the dictionary, each item is a set of key and value, like (key, value).
         rankedData = sorted(dataCollection.items(), key=operator.itemgetter(1))
 
-        with open('{0}Model_rank_on_{1}.json'.format(self.path, selectionCriteria), 'w') as outFile:
-            outFile.write(jsonpickle.encode({'rank': rankedData, 'selectionCriteria': selectionCriteria, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
+        with open('{0}Model_rank_on_{1}.json'.format(self.path, self.selectionCriterion), 'w') as outFile:
+            outFile.write(jsonpickle.encode({'rank': rankedData, 'selectionCriteria': self.selectionCriterion, 'optimizationSetting': optimizationSetting, 'energyFunction': energyFunction}))
 
-        with open('{0}Model_rank_on_{1}.txt'.format(self.path, selectionCriteria), 'w') as outFile:
-            outFile.write("Model rank of {0} based on model selection criteria.\n".format(selectionCriteria))
+        with open('{0}Model_rank_on_{1}.txt'.format(self.path, self.selectionCriterion), 'w') as outFile:
+            outFile.write("Model rank of {0} based on model selection criteria.\n".format(self.selectionCriterion))
             for data in rankedData:
                 outFile.write('{0}: optimizeParams: {1} \n'.format(data[0], data[1]))
 
