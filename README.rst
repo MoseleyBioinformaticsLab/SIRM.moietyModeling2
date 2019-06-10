@@ -1,7 +1,6 @@
 moiety_modeling
 ===============
 
-
 .. image:: https://img.shields.io/pypi/v/moiety_modeling.svg
    :target: https://pypi.org/project/moiety_modeling
    :alt: Current library version
@@ -89,11 +88,8 @@ Using moiety_modeling to visualize the optimzed results.
 
 .. note:: Read the User Guide and the ``moiety_modeling`` Tutorial on ReadTheDocs_ to learn more and to see code examples on using the ``moiety_modeling`` as a library and as a command-line tool.
 
-
 License
 ~~~~~~~
-
-.. include:: ../LICENSE
 
 Made available under the terms of The modified Clear BSD License. See full license in LICENSE_.
 
