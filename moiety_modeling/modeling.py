@@ -463,88 +463,90 @@ class OptimizationManager:
 
         for optimizationMethod in self.optimizations:
 
-            optimizationParameters = self.optimizations[optimizationMethod]
+            for setting in self.optimizations[optimizationMethod]:
 
-            if not os.path.exists(self.path + '/' + optimizationParameters['optimizationSetting']):
-                os.mkdir(self.path + '/' + optimizationParameters['optimizationSetting'])
-            path = self.path + '/' + optimizationParameters['optimizationSetting'] + '/'
+                optimizationParameters = setting
 
-            for model in self.models:
+                if not os.path.exists(self.path + '/' + optimizationParameters['optimizationSetting']):
+                    os.mkdir(self.path + '/' + optimizationParameters['optimizationSetting'])
+                path = self.path + '/' + optimizationParameters['optimizationSetting'] + '/'
 
-                datasets = []
-                datasetName = ''
+                for model in self.models:
 
-                for dataset in self.datasets:
-                    # datasets can contain more molecules than model.
+                    datasets = []
+                    datasetName = ''
 
-                    if set([molecule.name for molecule in model.molecules]).issubset(set(dataset.keys())):
-                        datasetName += dataset.datasetName + " "
-                        datasets.append(dataset)
+                    for dataset in self.datasets:
+                        # datasets can contain more molecules than model.
 
-                if datasets:
-                    logger.info("Performing {0} optimization on {1} with {2}dataset".format(optimizationParameters['optimizationSetting'], model.name, datasetName))
+                        if set([molecule.name for molecule in model.molecules]).issubset(set(dataset.keys())):
+                            datasetName += dataset.datasetName + " "
+                            datasets.append(dataset)
 
-                    if optimizationMethod == 'SAGA':
-                        if self.split:
-                            optimization = SAGAseparateOptimization(model, datasets, path,  optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationParameters['noPrintBestResults'], optimizationParameters['noPrintAllResults'])
+                    if datasets:
+                        logger.info("Performing {0} optimization on {1} with {2}dataset".format(optimizationParameters['optimizationSetting'], model.name, datasetName))
+
+                        if optimizationMethod == 'SAGA':
+                            if self.split:
+                                optimization = SAGAseparateOptimization(model, datasets, path,  optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationParameters['noPrintBestResults'], optimizationParameters['noPrintAllResults'])
+                            else:
+                                optimization = SAGAoptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationParameters['noPrintBestResults'], optimizationParameters['noPrintAllResults'])
+                            optimization.creatSubdir()
+                        elif optimizationMethod in ['L-BFGS-B', 'TNC', 'SLSQP']:
+                            if self.split:
+                                optimization = ScipySeparateOptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationMethod)
+                            else:
+                                optimization = ScipyOptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationMethod)
                         else:
-                            optimization = SAGAoptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationParameters['noPrintBestResults'], optimizationParameters['noPrintAllResults'])
-                        optimization.creatSubdir()
-                    elif optimizationMethod in ['L-BFGS-B', 'TNC', 'SLSQP']:
-                        if self.split:
-                            optimization = ScipySeparateOptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationMethod)
-                        else:
-                            optimization = ScipyOptimization(model, datasets, path, optimizationParameters['methodParameters'], optimizationParameters['optimizationSetting'], self.energyFunction, optimizationMethod)
-                    else:
-                        logger.warning("The optimization optimizationMethod does not exist for {0} with {1}.".format(model.name, optimizationParameters['optimizationSetting']))
-                        if self.force:
-                            continue
-                        else:
-                            sys.exit("Optimization stops with error.")
-
-                    if self.multiprocess:
-                        try:
-                            with multiprocessing.Pool() as pool:
-                                optimization.bestGuesses = pool.map(optimization.optimizeSingle, (i + 1 for i in range(self.times)))
-                        except Exception:
-                            logger.exception("{0} with {1} optimization setting fails at multiprocessing".format(model.name, optimizationParameters['optimizationSetting']))
+                            logger.warning("The optimization optimizationMethod does not exist for {0} with {1}.".format(model.name, optimizationParameters['optimizationSetting']))
                             if self.force:
                                 continue
                             else:
                                 sys.exit("Optimization stops with error.")
-                    else:
-                        for i in range(self.times):
+
+                        if self.multiprocess:
                             try:
-                                optimization.bestGuesses.append(optimization.optimizeSingle(i))
+                                with multiprocessing.Pool() as pool:
+                                    optimization.bestGuesses = pool.map(optimization.optimizeSingle, (i + 1 for i in range(self.times)))
                             except Exception:
-                                logger.exception("{0} with {1} optimization setting fails at {2} iteration".format(model.name, optimizationParameters['optimizationSetting'], i))
+                                logger.exception("{0} with {1} optimization setting fails at multiprocessing".format(model.name, optimizationParameters['optimizationSetting']))
                                 if self.force:
                                     continue
                                 else:
                                     sys.exit("Optimization stops with error.")
+                        else:
+                            for i in range(self.times):
+                                try:
+                                    optimization.bestGuesses.append(optimization.optimizeSingle(i))
+                                except Exception:
+                                    logger.exception("{0} with {1} optimization setting fails at {2} iteration".format(model.name, optimizationParameters['optimizationSetting'], i))
+                                    if self.force:
+                                        continue
+                                    else:
+                                        sys.exit("Optimization stops with error.")
 
-                    # to compress the SAGA optimization results
-                    if optimizationMethod == 'SAGA':
-                        if os.path.exists(optimization.path + model.name + '_all'):
-                            shutil.make_archive(optimization.path + model.name + '_all', 'zip', optimization.path + model.name + '_all')
-                            shutil.rmtree(optimization.path + model.name + '_all')
-                        if os.path.exists(optimization.path + model.name +'_best'):
-                            shutil.make_archive(optimization.path + model.name + '_best', 'zip', optimization.path + model.name + '_best')
-                            shutil.rmtree(optimization.path + model.name + '_best')
+                        # to compress the SAGA optimization results
+                        if optimizationMethod == 'SAGA':
+                            if os.path.exists(optimization.path + model.name + '_all'):
+                                shutil.make_archive(optimization.path + model.name + '_all', 'zip', optimization.path + model.name + '_all')
+                                shutil.rmtree(optimization.path + model.name + '_all')
+                            if os.path.exists(optimization.path + model.name +'_best'):
+                                shutil.make_archive(optimization.path + model.name + '_best', 'zip', optimization.path + model.name + '_best')
+                                shutil.rmtree(optimization.path + model.name + '_best')
 
-                    if self.printOptimizationScript:
-                        optimization.optimizationScripts()
+                        if self.printOptimizationScript:
+                            optimization.optimizationScripts()
 
-                    jsonpickle.set_encoder_options('json', sort_keys=True, indent=4)
-                    with open('{0}{1}_{2}.json'.format(path, model.name, optimization.optimizationSetting), 'w') as outFile:
-                        outFile.write(jsonpickle.encode({'model': model, 'datasets': datasets, 'bestGuesses': optimization.bestGuesses, 'optimizationSetting': optimization.optimizationSetting, 'energyFunction': self.energyFunction}))
+                        jsonpickle.set_encoder_options('json', sort_keys=True, indent=4)
+                        with open('{0}{1}_{2}.json'.format(path, model.name, optimization.optimizationSetting), 'w') as outFile:
+                            outFile.write(jsonpickle.encode({'model': model, 'datasets': datasets, 'bestGuesses': optimization.bestGuesses, 'optimizationSetting': optimization.optimizationSetting, 'energyFunction': self.energyFunction}))
 
-            # to store the paths to the optimization results files.
-            with open(self.path + '/{0}_{1}.txt'.format(optimizationParameters['optimizationSetting'], self.energyFunction), 'w') as resultsFile:
-                for dirpath, _, filenames in os.walk(path):
-                    for f in filenames:
-                        if f.endswith('{0}.json'.format(optimizationParameters['optimizationSetting'])):
-                            resultsFile.write(os.path.abspath(os.path.join(dirpath, f)) + '\n')
+                # to store the paths to the optimization results files.
+                with open(self.path + '/{0}_{1}.txt'.format(optimizationParameters['optimizationSetting'], self.energyFunction), 'w') as resultsFile:
+                    for dirpath, _, filenames in os.walk(path):
+                        for f in filenames:
+                            if f.endswith('{0}.json'.format(optimizationParameters['optimizationSetting'])):
+                                resultsFile.write(os.path.abspath(os.path.join(dirpath, f)) + '\n')
 
     def _initLogging(self):
 
