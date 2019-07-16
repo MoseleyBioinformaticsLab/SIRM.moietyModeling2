@@ -41,12 +41,12 @@ class ResultsAnalysis:
         self.path = path if path is not None else os.path.dirname(filename) + '/'
         with open(filename) as file:
             data = jsonpickle.decode(file.read(), keys=True)
+        self.resultsFile = os.path.splitext(os.path.basename(filename))[0]
         self.model = data['model']
         self.datasets = data['datasets']
         self.bestGuesses = data['bestGuesses']
         self.optimizationSetting = data['optimizationSetting']
         self.energyFunction = data['energyFunction']
-        self.jsonfilePath = None
 
     def analyze(self):
         """Analyze the optimization results for each model.
@@ -102,7 +102,7 @@ class ResultsAnalysis:
         optimizeParams = {'AIC': self._calculateMeanStdMaxMin(RSS_AIC), 'AICc': self._calculateMeanStdMaxMin(RSS_AICc), 'BIC': self._calculateMeanStdMaxMin(BIC), 'energy': self._calculateMeanStdMaxMin(energy)}
 
         # write the descriptive stats results for readability.
-        scriptFile = open('{0}{1}_{2}_{3}_Descriptive_Stats.txt'.format(self.path, self.model.name, self.optimizationSetting, self.energyFunction), 'w')
+        scriptFile = open('{0}{1}_Descriptive_Stats.txt'.format(self.path, self.resultsFile), 'w')
         scriptFile.write("Descriptive Statistics of {0} using {1} and {2} energy function \n\n".format(self.model.name, self.optimizationSetting, self.energyFunction))
         scriptFile.write("Moiety States Statistical Results: \n")
 
@@ -129,8 +129,7 @@ class ResultsAnalysis:
         scriptFile.close()
 
         # write the analysis results into JSON file for reusability.
-        self.jsonfilePath = '{0}{1}_{2}_{3}_Stats.json'.format(self.path, self.model.name, self.optimizationSetting, self.energyFunction)
-        with open(self.jsonfilePath, 'w') as outJSONfile:
+        with open('{0}{1}_States.json'.format(self.path, self.resultsFile), 'w') as outJSONfile:
             outJSONfile.write(jsonpickle.encode({'model': self.model.name, 'optimizeParams': optimizeParams, 'moietyValues': moietyValues, 'calculatedMolecules': calculatedMoleculesStats, 'datasets': self.datasets, "optimizationSetting": self.optimizationSetting, 'energyFunction': self.energyFunction}))
 
         return {'optimizeParams': optimizeParams, 'moietyValues': moietyValues, 'calculatedMolecules': calculatedMoleculesStats}
@@ -386,6 +385,11 @@ class PlotMoietyDistribution:
             optimizationSetting = data['optimizationSetting']
             energyFunction = data['energyFunction']
             moietyValues = data['moietyValues']
+            datasets = data['datasets']
+            datasetName = ''
+            for dataset in datasets:
+                datasetName += dataset.datasetName + '_'
+
             moietyCollections = {}
             for dataset in moietyValues[0].keys():
                 for moietyState in moietyValues[0][dataset].keys():
@@ -393,15 +397,16 @@ class PlotMoietyDistribution:
                     moietyCollections['DS{0}.{1}'.format(dataset, moietyState)] = moietyValueList
             nPlots = len(moietyCollections)
             labels = sorted(moietyCollections.keys())
+            f = plt.figure(figsize=(2, 3))
+            f.subplots_adjust(hspace=1,wspace=1)
             for i in range(nPlots):
                 value = moietyCollections[labels[i]]
-                plt.subplot(int(nPlots/5)+1, 5, i+1)
+                f.add_subplot(int(nPlots/5)+1, 5, i+1)
                 plt.hist(value, 30, range=[0,1], align='mid', alpha=0.5, density=True)
                 plt.xlabel("Moiety Value")
                 plt.ylabel("Counts")
                 plt.title("{0}".format(labels[i]), fontsize=10)
-            plt.suptitle('Moiety value histogram of model {0} with {1} optimization setting and {2} energy function'.format(model, optimizationSetting, energyFunction))
-            plt.tight_layout()
+            plt.suptitle('Moiety value histogram of model {0} with {1}dataset using {2} optimization with {3} energy function'.format(model, datasetName, optimizationSetting, energyFunction))
             plt.show()
 
 

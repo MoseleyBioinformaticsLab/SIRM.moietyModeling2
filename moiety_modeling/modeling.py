@@ -158,8 +158,10 @@ class ModelOptimization(abc.ABC):
         :return: None
         :rtype: :py:obj:`None`
         """
-
-        outputFile = open('{0}{1}_{2}_optimization_scripts.txt'.format(self.path, self.model.name, self.optimizationSetting), 'w')
+        datasetName = ''
+        for dataset in self.datasets:
+            datasetName += dataset.datasetName + '_'
+        outputFile = open('{0}{1}_{2}_optimization_with_{3}dataset_scripts.txt'.format(self.path, self.model.name, self.optimizationSetting, datasetName), 'w')
         outputFile.write(self.model.name+'\n')
         for moiety in self.model.moieties:
             outputFile.write(str(moiety)+'\n')
@@ -480,7 +482,7 @@ class OptimizationManager:
                         # datasets can contain more molecules than model.
 
                         if set([molecule.name for molecule in model.molecules]).issubset(set(dataset.keys())):
-                            datasetName += dataset.datasetName + " "
+                            datasetName += dataset.datasetName + "_"
                             datasets.append(dataset)
 
                     if datasets:
@@ -538,7 +540,8 @@ class OptimizationManager:
                             optimization.optimizationScripts()
 
                         jsonpickle.set_encoder_options('json', sort_keys=True, indent=4)
-                        with open('{0}{1}_{2}.json'.format(path, model.name, optimization.optimizationSetting), 'w') as outFile:
+                        fileName = '{0}{1}_{2}{3}.json'.format(path, model.name, datasetName, optimization.optimizationSetting)
+                        with open(fileName, 'w') as outFile:
                             outFile.write(jsonpickle.encode({'model': model, 'datasets': datasets, 'bestGuesses': optimization.bestGuesses, 'optimizationSetting': optimization.optimizationSetting, 'energyFunction': self.energyFunction}))
 
                 # to store the paths to the optimization results files.
@@ -554,10 +557,6 @@ class OptimizationManager:
         To create logger to store optimization process information.
         :return: logging
         """
+        logging.basicConfig(level=logging.INFO, filename=self.path + '/logFile.log')
 
-        formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(module)s: %(message)s', datefmt='%m/%d/%Y %H:%M:%S' )
-        fileHandler = logging.FileHandler(self.path + '/logFile.log')
-        fileHandler.setFormatter(formatter)
-        logging.getLogger().addHandler(fileHandler)
-        logging.getLogger().setLevel(logging.INFO)
         return logging

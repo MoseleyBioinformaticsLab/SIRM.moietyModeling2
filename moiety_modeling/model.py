@@ -21,33 +21,36 @@ class Moiety:
 
     """Moiety class describes the :class:`~moiety_modeling.model.Moiety` entity in the moiety model."""
 
-    def __init__(self, name, maxIsotopeNum, isotopeStates, nickname=' ', ranking=0):
+    def __init__(self, name, maxIsotopeNum, states=None, isotopeStates=None, nickname=' ', ranking=0):
+
         """Moiety initializer.
 
         :param str name: the name of the moiety.
-        :param dict maxIsotopeNum: the dictionary of the labeling isotopes and the corresponding number in the moiety. eg: {'13C': 5, '15N': 3}
-        :param dict isotopeStates: the dictionary of the labeling isotopes and the corresponding states in the moiety. eg: {'13C': [0, 2, 5], '15N': [2, 3]}
+        :param dict maxIsotopeNum: the dictionary of the labeling isotopes and the corresponding number in the moiety. eg: {'13C': 5, '15N': 3}.
+        :param list states: the list of states of the moiety.
+        :param dict isotopeStates: the dictionary of the labeling isotopes and the corresponding states in the moiety. eg: {'13C': [0, 2, 5], '15N': [2, 3]}.
         :param str nickname: the nickname of the moiety.
         :param int ranking: the ranking of the moiety.
         """
+
         self.name = name
-        self.maxIsotopeNum = dict(maxIsotopeNum)
-        self.isotopeStates = dict(isotopeStates)
+        self.maxIsotopeNum = maxIsotopeNum
+        self.isotopeStates = isotopeStates
         self.nickname = nickname
         self.ranking = ranking
-        self.states = self._createStates()
+        self.states = states if states else self._createStates()
 
     def _createStates(self):
 
         """
-        To calculate the states of moiety. The combinations of each isotope and its state.
-        :return: the list of states of the moiety. eg: ['13C0.15N2', '13C2.15N3']
+        To calculate the states of moiety based on the isotopeStates if provided.
+        :return: the list of states of the moiety. eg: ['13C_0.15N_2', '13C_2.15N_3']
         """
 
         states = []
-        isotopes = sorted(self.isotopeStates)
+        isotopes = sorted(self.maxIsotopeNum)
         for moietyStateComposition in itertools.product(*[self.isotopeStates[isotope] for isotope in isotopes]):
-            states.append('.'.join([isotopes[i] + str(moietyStateComposition[i]) for i in range(len(isotopes))]))
+            states.append('.'.join([isotopes[i] + '_' + str(moietyStateComposition[i]) for i in range(len(isotopes))]))
         return states
 
     def __str__(self):
@@ -56,10 +59,11 @@ class Moiety:
         :return: the string representation.
         """
 
-        isotopes = sorted(self.isotopeStates)
+        isotopes = sorted(self.maxIsotopeNum)
         string = "Moiety: {0}({1}) \tIsotopes: {2} \tIsotopeStates: ".format(self.name, self.nickname, ','.join(["{0}({1})".format(isotope, self.maxIsotopeNum[isotope]) for isotope in isotopes]))
-        for isotope in isotopes:
-            string += "{0}[{1}]  ".format(isotope, ', '.join(str(i) for i in self.isotopeStates[isotope]))
+        if self.isotopeStates:
+            for isotope in isotopes:
+                string += "{0}[{1}]  ".format(isotope, ', '.join(str(i) for i in self.isotopeStates[isotope]))
         string += "\nMoietyStates: [{0}]".format(', '.join(self.states))
         return string
 
@@ -73,10 +77,10 @@ class Relationship:
 
         :param moiety: the :class:`~moiety_modeling.model.Moiety` in the relationship.
         :type moiety: :class:`~moiety_modeling.model.Moiety`
-        :param str moietyState: the state of the moiety (eg: '13C0.15N1').
+        :param str moietyState: the state of the moiety (eg: '13C_0.15N_1').
         :param equivalentMoiety: :class:`~moiety_modeling.model.Moiety` in the relationship.
         :type equivalentMoiety: :class:`~moiety_modeling.model.Moiety`
-        :param str equivalentMoietyState: the state of the equivalentMoiety (eg: '13C0.15N1').
+        :param str equivalentMoietyState: the state of the equivalentMoiety (eg: '13C_0.15N_1').
         :param str operator: the operator of the relationship ('*', '/').
         :param double coefficient: the coefficient of the relationship.
         """
@@ -133,16 +137,16 @@ class Molecule:
 
         """Calculate all the possible molecule states based on the max isotope number.
 
-        :return: the list of the molecule states. eg: ['13C0.15N0', '13C1.15N0'...]
+        :return: the list of the molecule states. eg: ['13C_0.15N_0', '13C_1.15N_0'...]
         """
         # moiety1: {'13C': 6, '15N': 3}, {'13C': [0, 2, 5], '15N': [2, 3]}; moiety2: {'13C': 4, '15N': 5}, {'13C': [1, 3, 4], '15N': [1, 5]}
         # moietyIsotopeNum = [[6, 4], [3, 5]]
         allStates = []
-        isotopes = sorted(self.moieties[0].isotopeStates)
-        moietyIsotopeNumList = [[moiety.maxIsotopeNum[isotope] for moiety in self.moieties] for isotope in sorted(self.moieties[0].isotopeStates)]
+        isotopes = sorted(self.moieties[0].maxIsotopeNum)
+        moietyIsotopeNumList = [[moiety.maxIsotopeNum[isotope] for moiety in self.moieties] for isotope in isotopes]
         allStateCompositions = [[i for i in range(sum(isotopeNumList)+1)] for isotopeNumList in moietyIsotopeNumList]
         for moleculeStateComposition in itertools.product(*allStateCompositions):
-            allStates.append('.'.join([isotopes[i]+str(moleculeStateComposition[i]) for i in range(len(isotopes))]))
+            allStates.append('.'.join([isotopes[i] + '_' + str(moleculeStateComposition[i]) for i in range(len(isotopes))]))
         return allStates
 
     def _createStandardStates(self):
@@ -152,22 +156,34 @@ class Molecule:
         :return: the standard molecule states.
         """
 
-        # moietyStates : [[[0, 2, 5], [1, 3, 4]] , [[2, 3], [1, 5]]]
         moleculeStates = collections.defaultdict(list)
-        isotopes = sorted(self.moieties[0].isotopeStates)
-        moietyStates = [[moiety.isotopeStates[isotope] for moiety in self.moieties] for isotope in sorted(self.moieties[0].isotopeStates)]
-        for moleculeStateCompositions in itertools.product(*[itertools.product(*i) for i in moietyStates]):
-            isotopeNum = [sum(i) for i in moleculeStateCompositions]
-            moleculeComposition = [[] for i in range(len(self.moieties))]
-            # example of moleculeStateComposition: [[0 (moiety1), 1 (moiety2)] (13C), [2, 1] (15N))
-            for i in range(len(moleculeStateCompositions)):
-                for j in range(len(moleculeComposition)):
-                    moleculeComposition[j].append(isotopes[i]+str(moleculeStateCompositions[i][j]))
-            # example of molecule isotopomer: [g[13C0.15N2], u[13C1.15N1]]
-            isotopomer = ['{0}[{1}]'.format(self.moieties[i].name, '.'.join(moleculeComposition[i])) for i in range(len(self.moieties))]
-            isotopologue = '.'.join(['{0}{1}'.format(isotopes[i], str(isotopeNum[i])) for i in range(len(isotopeNum))])
+        states = [moiety.states for moiety in self.moieties]
+        isotopes = sorted(self.moieties[0].maxIsotopeNum)
+        for state in itertools.product(*states):
+            temIsotopeSum = {isotope: 0 for isotope in isotopes}
+            for moietyState in state:
+                seperateMoiety = [seperateState.split('_') for seperateState in moietyState.split('.')]
+                for seperateState in seperateMoiety:
+                    temIsotopeSum[seperateState[0]] += int(seperateState[1])
+            isotopomer = ['{0}[{1}]'.format(self.moieties[i].name, state[i]) for i in range(len(self.moieties))]
+            isotopologue = '.'.join(['{0}_{1}'.format(isotope, str(temIsotopeSum[isotope])) for isotope in isotopes])
             moleculeStates[isotopologue].append(isotopomer)
         return moleculeStates
+
+        # isotopes = sorted(self.moieties[0].isotopeStates)
+        # moietyStates = [[moiety.isotopeStates[isotope] for moiety in self.moieties] for isotope in sorted(self.moieties[0].isotopeStates)]
+        # for moleculeStateCompositions in itertools.product(*[itertools.product(*i) for i in moietyStates]):
+        #     isotopeNum = [sum(i) for i in moleculeStateCompositions]
+        #     moleculeComposition = [[] for i in range(len(self.moieties))]
+        #     # example of moleculeStateComposition: [[0 (moiety1), 1 (moiety2)] (13C), [2, 1] (15N))
+        #     for i in range(len(moleculeStateCompositions)):
+        #         for j in range(len(moleculeComposition)):
+        #             moleculeComposition[j].append(isotopes[i]+str(moleculeStateCompositions[i][j]))
+        #     # example of molecule isotopomer: [g[13C0.15N2], u[13C1.15N1]]
+        #     isotopomer = ['{0}[{1}]'.format(self.moieties[i].name, '.'.join(moleculeComposition[i])) for i in range(len(self.moieties))]
+        #     isotopologue = '.'.join(['{0}{1}'.format(isotopes[i], str(isotopeNum[i])) for i in range(len(isotopeNum))])
+        #     moleculeStates[isotopologue].append(isotopomer)
+        # return moleculeStates
 
     def __str__(self):
 
