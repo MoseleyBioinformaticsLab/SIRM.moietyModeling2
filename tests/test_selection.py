@@ -5,14 +5,14 @@ import math
 
 @pytest.mark.parametrize("optimization_file, analysis_file", [
 
-    ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000/best_model_SAGA_1000.json",
-     "tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
-    ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SLSQP/best_model_SLSQP.json",
-     "tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/SLSQP_logDifference_analysis/best_model_SLSQP_logDifference_Stats.json"),
-    ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/TNC/best_model_TNC.json",
-     "tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/TNC_logDifference_analysis/best_model_TNC_logDifference_Stats.json"),
-    ("tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/L_BFGS_B/best_model_L_BFGS_B.json",
-     "tests/analysis_results/models_UDP_data_24_48_72_optimizationSetting_T_100_S_M_logDifference/L_BFGS_B_logDifference_analysis/best_model_L_BFGS_B_logDifference_Stats.json")
+    ("tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/SAGA_1000/best_model_SAGA_1000.json",
+     "tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/SAGA_1000_logDifference_analysis/best_model_SAGA_1000_logDifference_Stats.json"),
+    ("tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/SLSQP/best_model_SLSQP.json",
+     "tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/SLSQP_logDifference_analysis/best_model_SLSQP_logDifference_Stats.json"),
+    ("tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/TNC/best_model_TNC.json",
+     "tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/TNC_logDifference_analysis/best_model_TNC_logDifference_Stats.json"),
+    ("tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/L_BFGS_B/best_model_L_BFGS_B.json",
+     "tests/analysis_results/all_single_models_UDP_data_48_72_optimization_setting_T_100_S_M_logDifference/L_BFGS_B_logDifference_analysis/best_model_L_BFGS_B_logDifference_Stats.json")
 ])
 def test_analysis(optimization_file, analysis_file):
 
@@ -22,8 +22,6 @@ def test_analysis(optimization_file, analysis_file):
         standardResults = jsonpickle.decode(file.read())
     anaMolecules = analysisResults['calculatedMolecules']
     standMolecules = standardResults['calculatedMolecules']
-    print("anaMolecules", anaMolecules)
-    print("standMolecules", standMolecules)
 
     for molecule in anaMolecules:
         for isotopologue in anaMolecules[molecule]:

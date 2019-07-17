@@ -252,11 +252,11 @@ class SAGAoptimization(ModelOptimization):
         :return: the best :class:`~SAGA_optimize.Guess` from the optimization process.
         :rtype: :class:`~SAGA_optimize.Guess`.
         """
-
         saga = SAGA_optimize.SAGA(**self.methodParameters, bestResultsFile=self.bestResultsFile(i), allResultsFile=self.allResultsFile(i), energyCalculation=self.energyCalculation)
         for element in self.elements:
             saga.addElementDescriptions(SAGA_optimize.ElementDescription(name=element, low=0, high=1))
         optimizedPopulation = saga.optimize()
+
         if saga.allResultsFile:
             saga.allResultsFile.close()
         if saga.bestResultsFile:

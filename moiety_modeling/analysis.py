@@ -47,6 +47,7 @@ class ResultsAnalysis:
         self.bestGuesses = data['bestGuesses']
         self.optimizationSetting = data['optimizationSetting']
         self.energyFunction = data['energyFunction']
+        self.jsonfilePath = '{0}{1}_States.json'.format(self.path, self.resultsFile)
 
     def analyze(self):
         """Analyze the optimization results for each model.

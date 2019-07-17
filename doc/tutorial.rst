@@ -23,10 +23,10 @@ Here is an example of moiety model construction.
     
     >>> import moiety_modeling
     >>> import jsonpickle
-    >>> ribose = moiety_modeling.Moiety("ribose", {'13C': 5}, {'13C': [0, 2, 3, 5]}, 'r')   # moiety creation
-    >>> glucose = moiety_modeling.Moiety("glucose", {'13C': 6}, {'13C': [0, 3, 6]}, 'g')
-    >>> acetyl = moiety_modeling.Moiety("acetyl", {'13C': 2}, {'13C': [0, 2]}, 'a')
-    >>> uracil = moiety_modeling.Moiety("uracil", {'13C': 4}, {'13C': [0, 1, 2, 3]}, 'u')
+    >>> ribose = moiety_modeling.Moiety("ribose", {'13C': 5}, isotopeStates={'13C': [0, 2, 3, 5]}, nickname='r')   # moiety creation
+    >>> glucose = moiety_modeling.Moiety("glucose", {'13C': 6}, isotopeStates={'13C': [0, 3, 6]}, nickname='g')
+    >>> acetyl = moiety_modeling.Moiety("acetyl", {'13C': 2}, isotopeStates={'13C': [0, 2]}, nickname='a')
+    >>> uracil = moiety_modeling.Moiety("uracil", {'13C': 4}, isotopeStates={'13C': [0, 1, 2, 3]}, nickname='u')
     >>> relationship1 = moiety_modeling.Relationship(glucose1, '13C3', ribose1, '13C2', '*', 2)   # relationship creation
     >>> relationship2 = moiety_modeling.Relationship(ribose1, '13C3', ribose1, '13C2')
     >>> relationship3 = moiety_modeling.Relationship(glucose1, '13C0', ribose1, '13C0')
@@ -35,6 +35,15 @@ Here is an example of moiety model construction.
     >>> model = moiety_modeling.Model('6_G0R2A1U3_g3r2r3_g6r5', [ribose, glucose, acetyl, uracil], [UDP_GlcNAC], [relationship1, relationship2, relationship3, relationship4])  
     >>> with open('model.json', 'w') as outFile:   # store the model into JSONPickle file.
             outFile.write(jsonpickle.encode({'models': [model]}))
+
+The moiety states can also be constructed using all the possible states.
+
+.. code:: Python
+
+    >>> glucose = moiety_modeling.Moiety("glucose", {'13C': 6, '18O': 5}, states=['13C_0.18O_0', '13C_6.18O_5'], nickname='g')
+    >>> ribose = moiety_modeling.Moiety("ribose", {'13C': 5, '18O': 4}, states=['13C_0.18O_0', '13C_5.18O_4'], nickname='r')
+    >>> acetyl = moiety_modeling.Moiety("acetyl", {'13C': 2, '18O': 1}, states=['13C_0.18O_0', '13C_2.18O_1'], nickname='a')    
+    >>> uracil = moiety_modeling.Moiety("uracil", {'13C': 4, '18O': 2}, states=['13C_0.18O_0', '13C_1.18O_0', '13C_2.18O_1', '13C_2.18O_0', '13C_3.18O_0', '13C_3.18O_1'], nickname='u')
 
 Using moiety_modeling to store isotopologue dataset
 ---------------------------------------------------
@@ -48,43 +57,43 @@ Here is an example of dataset construction.
     >>> import moiety_modeling
     >>> import jsonpickle
     >>> dataset1 = moiety_modeling.Dataset("12h", {'UDP_GlcNAC': 
-                  [{'labelingIsotopes': '13C0', 'height': 0.0175442549, 'heightSE': 0},
-                   {'labelingIsotopes': '13C1', 'height': 0, 'heightSE': 0},
-                   {'labelingIsotopes': '13C2', 'height': 0.0007113347, 'heightSE': 0},
-                   {'labelingIsotopes': '13C3', 'height': 0.0002990498, 'heightSE': 0},
-                   {'labelingIsotopes': '13C4', 'height': 0.0012322448, 'heightSE': 0},
-                   {'labelingIsotopes': '13C5', 'height': 0.0962990868, 'heightSE': 0},
-                   {'labelingIsotopes': '13C6', 'height': 0.0737941503, 'heightSE': 0},
-                   {'labelingIsotopes': '13C7', 'height': 0.0194440036, 'heightSE': 0},
-                   {'labelingIsotopes': '13C8', 'height': 0.063026207, 'heightSE': 0},
-                   {'labelingIsotopes': '13C9', 'height': 0.0058731399, 'heightSE': 0},
-                   {'labelingIsotopes': '13C10', 'height': 0.0312896069, 'heightSE': 0},
-                   {'labelingIsotopes': '13C11', 'height': 0.3124695022, 'heightSE': 0},
-                   {'labelingIsotopes': '13C12', 'height': 0.0573898846, 'heightSE': 0},
-                   {'labelingIsotopes': '13C13', 'height': 0.277122791, 'heightSE': 0},
-                   {'labelingIsotopes': '13C14', 'height': 0.0234859781, 'heightSE': 0},
-                   {'labelingIsotopes': '13C15', 'height': 0.0200187655, 'heightSE': 0},
-                   {'labelingIsotopes': '13C16', 'height': 0, 'heightSE': 0},
-                   {'labelingIsotopes': '13C17', 'height': 0, 'heightSE': 0}]})
+                  [{'labelingIsotopes': '13C_0', 'height': 0.0175442549, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_1', 'height': 0, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_2', 'height': 0.0007113347, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_3', 'height': 0.0002990498, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_4', 'height': 0.0012322448, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_5', 'height': 0.0962990868, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_6', 'height': 0.0737941503, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_7', 'height': 0.0194440036, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_8', 'height': 0.063026207, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_9', 'height': 0.0058731399, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_10', 'height': 0.0312896069, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_11', 'height': 0.3124695022, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_12', 'height': 0.0573898846, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_13', 'height': 0.277122791, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_14', 'height': 0.0234859781, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_15', 'height': 0.0200187655, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_16', 'height': 0, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_17', 'height': 0, 'heightSE': 0}]})
     >>> dataset2 = moiety_modeling.Dataset("24h", {'UDP_GlcNAC': 
-                  [{'labelingIsotopes': '13C0', 'height': 0.00697626, 'heightSE': 0},
-                   {'labelingIsotopes': '13C1', 'height': 0, 'heightSE': 0},
-                   {'labelingIsotopes': '13C2', 'height': 0.0008426934, 'heightSE': 0},
-                   {'labelingIsotopes': '13C3', 'height': 0.0007070956, 'heightSE': 0},
-                   {'labelingIsotopes': '13C4', 'height': 0.0006206594, 'heightSE': 0},
-                   {'labelingIsotopes': '13C5', 'height': 0.068147345, 'heightSE': 0},
-                   {'labelingIsotopes': '13C6', 'height': 0.0499393097, 'heightSE': 0},
-                   {'labelingIsotopes': '13C7', 'height': 0.023993641, 'heightSE': 0},
-                   {'labelingIsotopes': '13C8', 'height': 0.062901247, 'heightSE': 0},
-                   {'labelingIsotopes': '13C9', 'height': 0.0056603032, 'heightSE': 0},
-                   {'labelingIsotopes': '13C10', 'height': 0.0281210238, 'heightSE': 0},
-                   {'labelingIsotopes': '13C11', 'height': 0.2482899264, 'heightSE': 0},
-                   {'labelingIsotopes': '13C12', 'height': 0.0613088541, 'heightSE': 0},
-                   {'labelingIsotopes': '13C13', 'height': 0.3325253653, 'heightSE': 0},
-                   {'labelingIsotopes': '13C14', 'height': 0.0499904271, 'heightSE': 0},
-                   {'labelingIsotopes': '13C15', 'height': 0.0537153908, 'heightSE': 0},
-                   {'labelingIsotopes': '13C16', 'height': 0.0062604583, 'heightSE': 0},
-                   {'labelingIsotopes': '13C17', 'height': 0, 'heightSE': 0}]})   # dataset creation
+                  [{'labelingIsotopes': '13C_0', 'height': 0.00697626, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_1', 'height': 0, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_2', 'height': 0.0008426934, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_3', 'height': 0.0007070956, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_4', 'height': 0.0006206594, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_5', 'height': 0.068147345, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_6', 'height': 0.0499393097, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_7', 'height': 0.023993641, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_8', 'height': 0.062901247, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_9', 'height': 0.0056603032, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_10', 'height': 0.0281210238, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_11', 'height': 0.2482899264, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_12', 'height': 0.0613088541, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_13', 'height': 0.3325253653, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_14', 'height': 0.0499904271, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_15', 'height': 0.0537153908, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_16', 'height': 0.0062604583, 'heightSE': 0},
+                   {'labelingIsotopes': '13C_17', 'height': 0, 'heightSE': 0}]})   # dataset creation
     >>> with open('dataset.json', 'w') as outFile: # store dataset into JSONPickle file.
             outFile.write(jsonpickle.encode({'datasets': [dataset1, dataset2]}))
 
