@@ -1,0 +1,20 @@
+{
+    "optimizations": {
+        "SAGA": [
+            {
+                "methodParameters": {
+                    "alpha": 1,
+                    "crossoverRate": 0.05,
+                    "mutationRate": 3,
+                    "populationSize": 20,
+                    "startTemperature": 0.5,
+                    "stepNumber": 1000,
+                    "temperatureStepSize": 100
+                },
+                "noPrintAllResults": 1,
+                "noPrintBestResults": 0,
+                "optimizationSetting": "SAGA_1000"
+            }
+        ]
+    }
+}
