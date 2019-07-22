@@ -66,7 +66,6 @@ class ResultsAnalysis:
                 subVector = [bestGuess.elements[i] for i in range(i* self.model.parameterNum, (i+1) * self.model.parameterNum)]
                 moietyValue[self.datasets[i].datasetName] = self.model.calculateMoietyState(subVector)
             moietyValues.append(moietyValue)
-        # print(moietyValues[0])
 
         RSS = []  # this stores the sum of diff square for each optimization result.
         calculatedMolecules = collections.defaultdict(list) # this is a list of calculated molecules for each guess.
@@ -403,7 +402,7 @@ class PlotMoietyDistribution:
             for i in range(nPlots):
                 value = moietyCollections[labels[i]]
                 f.add_subplot(int(nPlots/5)+1, 5, i+1)
-                plt.hist(value, 30, range=[0,1], align='mid', alpha=0.5, density=True)
+                plt.hist(value, 30, range=[0,1], align='mid')
                 plt.xlabel("Moiety Value")
                 plt.ylabel("Counts")
                 plt.title("{0}".format(labels[i]), fontsize=10)

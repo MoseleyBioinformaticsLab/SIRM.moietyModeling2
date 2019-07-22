@@ -8,12 +8,12 @@
                     "mutationRate": 3,
                     "populationSize": 20,
                     "startTemperature": 0.5,
-                    "stepNumber": 100,
+                    "stepNumber": 100000,
                     "temperatureStepSize": 100
                 },
                 "noPrintAllResults": 1,
                 "noPrintBestResults": 1,
-                "optimizationSetting": "SAGA_100"
+                "optimizationSetting": "SAGA_100000"
             }
         ]
     }

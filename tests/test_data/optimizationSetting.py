@@ -13,13 +13,13 @@ setting = {}
 # setting['SLSQP'].append({'methodParameters': None, 'optimizationSetting': 'SLSQP'})
 
 setting['SAGA'] = []
-setting['SAGA'].append({'methodParameters': {'alpha': 1, 'crossoverRate': 0.05, 'mutationRate': 3, 'populationSize': 20, 'startTemperature': 0.5, 'stepNumber': 1000, 'temperatureStepSize': 100},
-        'noPrintAllResults': 1, 'noPrintBestResults': 0, 'optimizationSetting': 'SAGA_1000' })
+setting['SAGA'].append({'methodParameters': {'alpha': 1, 'crossoverRate': 0.05, 'mutationRate': 3, 'populationSize': 20, 'startTemperature': 0.5, 'stepNumber': 100000, 'temperatureStepSize': 100},
+        'noPrintAllResults': 1, 'noPrintBestResults': 1, 'optimizationSetting': 'SAGA_100000' })
 
 data ={'optimizations': setting}
 jsonpickle.set_encoder_options('json', sort_keys=True, indent=4)
 
-with open('SAGA.json', 'w') as outFile:
+with open('SAGA_setting.json', 'w') as outFile:
     outFile.write(jsonpickle.encode(data))
 
 
