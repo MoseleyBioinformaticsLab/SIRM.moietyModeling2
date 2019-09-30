@@ -31,7 +31,7 @@ This package includes the following modules:
 
 """
 
-__version__ = "1.0.3.1"
+__version__ = "1.0.3.2"
 
 from .modeling import *
 from .model import *
