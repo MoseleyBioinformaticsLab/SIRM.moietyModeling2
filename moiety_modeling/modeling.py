@@ -70,7 +70,7 @@ class ModelOptimization(abc.ABC):
         self.methodParameters = methodParameters
         self.optimizationSetting = optimizationSetting
         self.energyFunction = energyFunction
-        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction}
+        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction, 'squareDifference': self.squareDifferenceEnergyFunction}
         self.activeEnergyFunction = self.functionCollection[self.energyFunction]
         self.bestGuesses = []
         self.elements = self._createElements()
@@ -149,6 +149,50 @@ class ModelOptimization(abc.ABC):
                     energy += abs(math.log(leastIsotopologue) - math.log(isotopologue['height']))
                 elif calculated[isotopologue['labelingIsotopes']] != 0 and isotopologue['height'] != 0:
                     energy += abs(math.log(calculated[isotopologue['labelingIsotopes']]) - math.log(isotopologue['height']))
+        return energy
+
+    def squareDifferenceEnergyFunction(self, moietyStateValue, dataset):
+
+        """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues: energy = sum(|I<cal> - I<obs>|).
+
+        :param list moietyStateValue: a list of values for the moietyStates.
+        :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset`
+        :return: the energy of the model.
+        :rtype: double
+        """
+
+        energy = 0
+        for molecule in self.model.molecules:
+            if len(dataset[molecule.name]) != len(molecule.allStates):
+                sys.exit("The isotologue data of {0} is not enough.".format(molecule.name))
+            calculated = collections.defaultdict(lambda: 0)
+            for isotopologue in molecule.standardStates:
+                calculated[isotopologue] = sum(functools.reduce(operator.mul, [moietyStateValue[i] for i in isotopomer]) for isotopomer in molecule.standardStates[isotopologue])
+            energy += sum([(calculated[isotopologue['labelingIsotopes']] - isotopologue['height']) ** 2 for isotopologue in dataset[molecule.name]])
+        return energy
+
+    def AICDifferenceEnergyFunction(self, moietyStateValue, dataset):
+
+        """The absolute difference energy function. The absolute value between the observed and the calculated isotopologues: energy = sum(|I<cal> - I<obs>|).
+
+        :param list moietyStateValue: a list of values for the moietyStates.
+        :param dataset: a :class:`~moiety_modeling.modeling.Dataset` instance.
+        :type dataset: :class:`~moiety_modeling.modeling.Dataset`
+        :return: the energy of the model.
+        :rtype: double
+        """
+
+        energy = 0
+        for molecule in self.model.molecules:
+            if len(dataset[molecule.name]) != len(molecule.allStates):
+                sys.exit("The isotologue data of {0} is not enough.".format(molecule.name))
+            calculated = collections.defaultdict(lambda: 0)
+            for isotopologue in molecule.standardStates:
+                calculated[isotopologue] = sum(functools.reduce(operator.mul, [moietyStateValue[i] for i in isotopomer]) for isotopomer in molecule.standardStates[isotopologue])
+            energy += sum([(calculated[isotopologue['labelingIsotopes']] - isotopologue['height']) ** 2 for isotopologue in dataset[molecule.name]])
+        dataNum = sum([len(dataset[moleculeName]) for moleculeName in dataset.keys() for dataset in self.datasets])
+        energy = 2 * self.model.parameterNum + dataNum * math.log(energy / dataNum)
         return energy
 
     def optimizationScripts(self):
