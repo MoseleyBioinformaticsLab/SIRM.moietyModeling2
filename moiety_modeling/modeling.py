@@ -70,7 +70,7 @@ class ModelOptimization(abc.ABC):
         self.methodParameters = methodParameters
         self.optimizationSetting = optimizationSetting
         self.energyFunction = energyFunction
-        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction, 'squareDifference': self.squareDifferenceEnergyFunction}
+        self.functionCollection = {'absDifference': self.absDifferenceEnergyFunction, 'logDifference': self.logDifferenceEnergyFunction, 'squareDifference': self.squareDifferenceEnergyFunction, 'AICDifference': self.AICDifferenceEnergyFunction}
         self.activeEnergyFunction = self.functionCollection[self.energyFunction]
         self.bestGuesses = []
         self.elements = self._createElements()
